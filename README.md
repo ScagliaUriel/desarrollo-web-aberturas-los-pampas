@@ -6,9 +6,9 @@ Aberturas Los Pampas
 
 ## Integrantes
 
-- Manno Maximiliano
+- Máximo Manno
 - Alan Grandi
-- Peralta Román
+- Román Peralta
 - Uriel Scaglia
 
 ## Profesor
