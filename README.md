@@ -1,37 +1,56 @@
-# Trabajo Práctico Anual - Desarrollo Web
+# [Abertura Los Pampas] — Grupo [N]
 
-## Empresa
-
-Aberturas Los Pampas
+> Materia: Diseño de Sistemas Web — Analista Funcional de Sistemas  
+> Institución: Terciario Urquiza — Rosario  
+> Docente: Pedernera Pablo  
+> Cuatrimestre: 2.° 2026
 
 ## Integrantes
 
-- Máximo Manno
-- Alan Grandi
-- Román Peralta
-- Uriel Scaglia
+Ver [integrantes.md](integrantes.md)
 
-## Profesor
+## Descripción del proyecto
 
-Pablo Pedernera
+_Breve descripción del sistema que el grupo está analizando y documentando._
 
-## Descripción
+## Caso de estudio
 
-El proyecto propone el desarrollo de una plataforma web para la empresa Aberturas Los Pampas con el objetivo de mejorar la gestión comercial, el control de stock, la administración de proveedores y la venta online de productos.
+_Nombre del organismo o empresa comitente y contexto del problema que el sistema resuelve._
 
-## Contenido
+## Entregas
 
-- Presentación de la empresa
-- Stakeholders
-- Requisitos funcionales y no funcionales
-- Historias de usuario
-- Casos de uso
-- Modelo Entidad-Relación
+| Entrega | Descripción | Fecha | Estado |
+|---------|-------------|-------|--------|
+| EP-01 | Presentación preliminar | | |
+| EP-02 | | | |
+| Final | Versión definitiva | | |
 
-## DER
+## Estructura del repositorio
 
-![DER](imagenes/DiagramaER.png)
+```
+/
+├── README.md
+├── integrantes.md
+├── RECURSOS.md         ← leer antes de empezar: prerrequisitos, cheatsheet de git, recursos
+├── DoR.md              ← Definition of Ready: checklist del equipo + autoevaluación de 3 HU propias
+├── slicing.md          ← épica de la billetera partida en historias verticales (Partes A y B)
+├── docs/
+│   ├── requisitos.md
+│   ├── historias-de-usuario.md
+│   ├── casos-de-uso.md
+│   ├── er-modelo.md
+│   ├── diseño-ui.md
+│   └── stakeholders.md
+├── diagramas/
+│   ├── casos-de-uso.puml
+│   ├── er.puml
+│   └── wireframes/
+└── cuestionario/
+```
 
-## Documentación
+## Instrucciones operativas
 
-- Desarrollo Web - Trabajo Práctico Anual.pdf
+- Un integrante del grupo es responsable de subir los cambios al repositorio.
+- Completar `integrantes.md` antes de la primera entrega.
+- Mantener los archivos en la carpeta correspondiente según la estructura indicada.
+- Los diagramas deben entregarse en formato PlantUML (`.puml`). Se pueden visualizar en [plantuml.com](https://www.plantuml.com/plantuml/uml/).
