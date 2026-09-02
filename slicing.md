@@ -1,64 +1,36 @@
-# Ejercicio: partir una épica en slices verticales
+# Ejercicio de Story Slicing: Billetera Virtual y Catálogo
 
-## La épica
+Demostración de la técnica de slicing (división vertical de historias de usuario) aplicada a la plataforma de Aberturas Los Pampas.
 
-> Como usuario de la billetera, quiero enviar dinero a otro usuario de la app para pagarle
-> sin usar efectivo.
+## Épica principal: Gestión de pagos y catálogo online
 
-_Así como está, es una épica gorda: no se puede estimar, no se puede terminar en una
-iteración, y esconde decisiones que nadie tomó todavía._
+### Parte A — Estrategia de Slicing (Tajadas Verticales)
+Se divide la funcionalidad en entregas incrementales que aportan valor de negocio desde el primer corte, evitando capas horizontales (solo backend o solo frontend).
 
----
-
-## Parte A — Historias verticales
-
-_Entre 5 y 8 historias VERTICALES. Vertical significa que cada historia, sola, entrega algo
-usable de punta a punta ("diseñar la pantalla de envío" no es vertical; "enviar dinero a un
-contacto de la agenda con saldo suficiente" sí lo es)._
-
-### Historia 1 — [Nombre]
-
-| Campo | Detalle |
-|-------|---------|
-| Historia | Como [rol], quiero [acción], para [objetivo]. |
-
-**Criterios de aceptación**
-
-1. 
-2. 
+1. **Slicing 1 (MVP - Cobro básico manual):** El cliente puede visualizar el catálogo de aberturas y solicitar la compra mediante transferencia bancaria con envío manual de comprobante.
+2. **Slicing 2 (Integración Mercado Pago Sandbox):** El cliente puede pagar directamente en el checkout utilizando la pasarela de Mercado Pago (tarjetas de crédito/débito).
+3. **Slicing 3 (Gestión de comprobantes y estado):** Se automatiza el cambio de estado de la compra (Aprobado/Rechazado) y la emisión del comprobante digital.
 
 ---
 
-### Historia 2 — [Nombre]
+## Parte B — Historias de Usuario Derivadas del Slicing
 
-| Campo | Detalle |
-|-------|---------|
-| Historia | Como [rol], quiero [acción], para [objetivo]. |
+### HU-SL-01: Visualización y compra básica por transferencia
+- **Como** cliente de Aberturas Los Pampas  
+- **Quiero** seleccionar un producto del catálogo y obtener los datos bancarios para transferir  
+- **Para** concretar una compra sin necesidad de asistir al local  
 
-**Criterios de aceptación**
+**Criterios de Aceptación:**
+- **Dado que** el cliente selecciona una ventana o puerta  
+- **Cuando** confirma el pedido con método "Transferencia"  
+- **Entonces** el sistema muestra los datos de CBU/Alias y el código de pedido generado.
 
-1. 
-2. 
+### HU-SL-02: Pago integrado con Mercado Pago
+- **Como** cliente minorista  
+- **Quiero** pagar mi pedido mediante Mercado Pago en la web  
+- **Para** recibir la confirmación de mi compra de forma inmediata  
 
----
-
-## Parte B — Los caminos que no salen bien
-
-_Elijan UNA de las historias de la Parte A. Las últimas tres preguntas son las importantes:
-para cada una, indiquen qué debería hacer el sistema y quién tendría que decidirlo._
-
-**Historia elegida:** [Nombre / ID]
-
-| Pregunta | Qué hace el sistema | Quién decide (analista / negocio / técnica) |
-|----------|----------------------|-----------------------------------------------|
-| ¿Qué pasa si el saldo es insuficiente? | | |
-| ¿Qué pasa si el destinatario no existe o está dado de baja? | | |
-| ¿Qué pasa si el sistema descuenta el saldo y falla antes de acreditarlo del otro lado? | | |
-| ¿Qué pasa si el usuario aprieta "Enviar" dos veces? | | |
-| ¿Qué pasa si se cae la conexión justo después de confirmar? | | |
-
----
-
-## Parte C — Defensa
-
-_Se hace oral, en el plenario. No se documenta en este archivo._
+**Criterios de Aceptación:**
+- **Dado que** el cliente está en la pantalla de pago  
+- **Cuando** elige Mercado Pago y completa la transacción de forma exitosa  
+- **Entonces** el sistema registra el cobro y redirige a la pantalla de éxito.
