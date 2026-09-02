@@ -1,9 +1,116 @@
-@startuml
-title Modelo Entidad-Relación - [Nombre del Sistema]
+@startuml er
 
-' --- Entidades ---
-entity Entidad1 {
-  * id_entidad1 : integer <<PK>>
+title Empty Diagram - Er
+
+hide circle
+skinparam linetype ortho
+
+entity "Usuario" as usuario {
+  * id_usuario : PK
+  --
+  nombre
+  email
+  contraseña
+  rol
+}
+
+entity "Cliente" as cliente {
+  * id_cliente : PK
+  --
+  id_usuario : FK
+  tipo_cliente
+  razon_social
+  cuit
+  direccion
+}
+
+entity "Producto" as producto {
+  * id_producto : PK
+  --
+  nombre
+  tipo
+  material
+  a_medida
+  descripcion
+  precio
+  stock_actual
+}
+
+entity "Pedido" as pedido {
+  * id_pedido : PK
+  --
+  id_cliente : FK
+  fecha
+  estado
+  total
+}
+
+entity "DetallePedido" as detalle_pedido {
+  * id_detalle : PK
+  --
+  id_pedido : FK
+  id_producto : FK
+  cantidad
+  precio_unitario
+  medida_a_medida
+}
+
+entity "Pago" as pago {
+  * id_pago : PK
+  --
+  id_pedido : FK
+  id_mercadopago
+  monto
+  estado
+}
+
+entity "Instalacion" as instalacion {
+  * id_instalacion : PK
+  --
+  id_pedido : FK
+  tipo
+  fecha_programada
+  estado
+}
+
+entity "Proveedor" as proveedor {
+  * id_proveedor : PK
+  --
+  razon_social
+  cuit
+  contacto
+}
+
+entity "OrdenCompra" as orden_compra {
+  * id_orden : PK
+  --
+  id_proveedor : FK
+  fecha
+  plazo_entrega
+  estado
+}
+
+entity "DetalleOrdenCompra" as detalle_orden {
+  * id_detalle_orden : PK
+  --
+  id_orden : FK
+  id_producto : FK
+  cantidad
+  precio_unitario
+}
+
+usuario ||--o| cliente : "es (rol cliente)"
+cliente ||--o{ pedido : realiza
+pedido ||--|{ detalle_pedido : contiene
+producto ||--o{ detalle_pedido : incluido_en
+pedido ||--o| pago : tiene
+pedido ||--o| instalacion : tiene
+
+proveedor ||--o{ orden_compra : recibe
+orden_compra ||--|{ detalle_orden : contiene
+producto ||--o{ detalle_orden : solicitado_en
+
+@endumlK>>
   --
   atributo1 : varchar
   atributo2 : varchar
