@@ -1,4 +1,4 @@
-# Aberturas Los Pampas — Grupo 01
+# Aberturas Los Pampas — Grupo []
 
 > Materia: Diseño de Sistemas Web — Analista Funcional de Sistemas  
 > Institución: Terciario Urquiza — Rosario  
