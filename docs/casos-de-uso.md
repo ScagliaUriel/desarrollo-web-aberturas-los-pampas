@@ -1,35 +1,69 @@
-# Casos de Uso (CU)
+# Casos de Uso
 
-Especificación de los principales Casos de Uso del sistema para Aberturas Los Pampas.
+## Actores
 
-## CU-01: Realizar compra de aberturas online
+| Actor | Descripción |
+| ----- | ----------- |
+| Cliente | Persona o negocio (minorista o mayorista) que consulta el catálogo y realiza compras. |
+| Vendedor | Personal del sector de ventas; atiende clientes y gestiona pedidos. |
+| Encargado de Stock | Personal del sector de stock; mantiene actualizadas las cantidades disponibles. |
+| Administrador | Propietario(s); gestiona usuarios, proveedores y reportes generales. |
+| Mercado Pago | Sistema externo que procesa los pagos de las ventas. |
 
-- **Actor Principal:** Cliente Minorista / Mayorista.
-- **Precondiciones:** El cliente debe tener productos agregados en el carrito de compras.
-- **Garantía de Éxito (Postcondición):** La compra queda registrada, el stock descontado y el cobro procesado.
+## Listado de casos de uso
 
-### Flujo Principal:
-1. El cliente accede al carrito de compras y presiona "Proceder al Pago".
-2. El sistema solicita los datos de envío/retiro en local.
-3. El cliente ingresa la dirección de entrega o selecciona retiro en local.
-4. El sistema calcula el monto total y presenta los medios de pago.
-5. El cliente selecciona "Mercado Pago" y completa la transacción.
-6. El sistema confirma el pago, descuenta las unidades del stock y genera la orden de venta.
-7. El sistema muestra la pantalla de confirmación y envía un comprobante por e-mail.
+| ID | Caso de uso | Actor(es) principal(es) |
+| -- | ----------- | ------------------------ |
+| CU-01 | Consultar catálogo de productos | Cliente |
+| CU-02 | Filtrar / buscar productos | Cliente |
+| CU-03 | Registrarse en el sistema | Cliente |
+| CU-04 | Iniciar sesión | Cliente, Vendedor, Encargado de Stock, Administrador |
+| CU-05 | Agregar producto al carrito | Cliente |
+| CU-06 | Confirmar compra (checkout) | Cliente |
+| CU-07 | Pagar con Mercado Pago | Cliente, Mercado Pago |
+| CU-08 | Solicitar instalación de un producto | Cliente |
+| CU-09 | Consultar historial de compras propio | Cliente |
+| CU-10 | Gestionar productos (alta/baja/modificación) | Encargado de Stock, Administrador |
+| CU-11 | Actualizar stock disponible | Encargado de Stock |
+| CU-12 | Gestionar proveedores (alta/baja/modificación) | Administrador |
+| CU-13 | Generar orden de compra a proveedor | Administrador, Encargado de Stock |
+| CU-14 | Consultar historial de compras a proveedores | Administrador |
+| CU-15 | Ver reporte de ventas mensuales | Administrador |
+| CU-16 | Ver reporte de productos más vendidos | Administrador |
+| CU-17 | Gestionar usuarios del sistema | Administrador |
 
-### Flujos Alternativos:
-- **5a. Pago Rechazado:** Mercado Pago rechaza la operación por fondos insuficientes o error bancario. El sistema informa el motivo al cliente y le permite seleccionar otro medio de pago sin perder la orden.
-- **6a. Sin Stock Suficiente:** Si al momento de pagar otro usuario agotó el stock, el sistema notifica al cliente que el producto pasará a demora de entrega según plazos del proveedor.
+## Descripción de casos de uso principales
 
----
+### CU-06 — Confirmar compra (checkout)
+- **Actor principal:** Cliente
+- **Precondición:** El cliente tiene al menos un producto en el carrito y una sesión iniciada.
+- **Flujo principal:**
+  1. El cliente revisa los productos del carrito (cantidad, precio, subtotal).
+  2. El cliente indica si requiere instalación (CU-08).
+  3. El cliente selecciona método de pago (Mercado Pago).
+  4. El sistema deriva el pago a Mercado Pago (CU-07).
+  5. El sistema registra el pedido con estado "pendiente de pago".
+- **Flujo alternativo:** Si algún producto no tiene stock, el sistema informa el plazo de entrega estimado y permite confirmar igual (compra sujeta a reposición).
+- **Postcondición:** Se genera un pedido asociado al cliente, con su detalle de productos.
 
-## CU-02: Gestionar catálogo de productos
+### CU-07 — Pagar con Mercado Pago
+- **Actores:** Cliente, Mercado Pago
+- **Precondición:** Existe un pedido en estado "pendiente de pago".
+- **Flujo principal:**
+  1. El sistema redirige al cliente al checkout de Mercado Pago con el monto del pedido.
+  2. El cliente completa el pago en la plataforma externa.
+  3. Mercado Pago notifica el resultado al sistema.
+  4. El sistema actualiza el estado del pedido (pagado / rechazado).
+- **Postcondición:** El pedido queda con su estado de pago actualizado.
 
-- **Actor Principal:** Administrador / Personal de Ventas.
-- **Precondiciones:** Usuario autenticado con rol de Administrador.
+### CU-13 — Generar orden de compra a proveedor
+- **Actor principal:** Administrador / Encargado de Stock
+- **Precondición:** El proveedor y los productos a reponer ya están dados de alta en el sistema.
+- **Flujo principal:**
+  1. Se selecciona el proveedor.
+  2. Se agregan los productos y cantidades a solicitar.
+  3. Se indica el plazo de entrega acordado.
+  4. El sistema guarda la orden de compra asociada al proveedor.
+- **Postcondición:** Queda registrada la orden de compra, disponible en el historial del proveedor (CU-14).
 
-### Flujo Principal:
-1. El administrador ingresa al panel de control y selecciona "Gestión de Productos".
-2. El sistema muestra el listado completo de aberturas cargadas.
-3. El administrador selecciona "Agregar Producto", completa formulario (tipo, material, medidas, precio, imagen) y guarda.
-4. El sistema valida los campos y publica el nuevo producto en el catálogo web.
+Ver el diagrama de casos de uso en [`/diagramas/casos-de-uso.puml`](../diagramas/casos-de-uso.puml).
