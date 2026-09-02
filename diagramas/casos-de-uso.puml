@@ -1,6 +1,6 @@
 @startuml casos-de-uso
 
-title Empty Diagram - Abertura Los Pampas
+title Casos de Uso — Aberturas Los Pampas
 
 left to right direction
 skinparam packageStyle rectangle
@@ -59,26 +59,5 @@ Administrador --> CU14
 Administrador --> CU15
 Administrador --> CU16
 Administrador --> CU17
-
-@enduml
-' --- Actores ---
-actor "[Actor principal]" as A1
-actor "[Actor secundario]" as A2
-
-' --- Sistema ---
-rectangle "[Nombre del Sistema]" {
-  usecase "[Caso de uso 1]" as UC1
-  usecase "[Caso de uso 2]" as UC2
-  usecase "[Caso de uso 3]" as UC3
-}
-
-' --- Relaciones actor-caso de uso ---
-A1 --> UC1
-A1 --> UC2
-A2 --> UC3
-
-' --- Relaciones entre casos de uso ---
-' UC2 .> UC1 : <<include>>
-' UC3 .> UC1 : <<extend>>
 
 @enduml
