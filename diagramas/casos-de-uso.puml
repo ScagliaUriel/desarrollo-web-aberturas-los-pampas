@@ -1,8 +1,66 @@
-@startuml
-title Diagrama de Casos de Uso - [Nombre del Sistema]
+@startuml casos-de-uso
+
+title Empty Diagram - Abertura Los Pampas
 
 left to right direction
+skinparam packageStyle rectangle
 
+actor Cliente
+actor Vendedor
+actor "Encargado de Stock" as Stock
+actor Administrador
+actor "Mercado Pago" as MP
+
+rectangle "Sistema Web - Aberturas Los Pampas" {
+  usecase "CU-01 Consultar catálogo" as CU01
+  usecase "CU-02 Filtrar / buscar productos" as CU02
+  usecase "CU-03 Registrarse" as CU03
+  usecase "CU-04 Iniciar sesión" as CU04
+  usecase "CU-05 Agregar al carrito" as CU05
+  usecase "CU-06 Confirmar compra" as CU06
+  usecase "CU-07 Pagar con Mercado Pago" as CU07
+  usecase "CU-08 Solicitar instalación" as CU08
+  usecase "CU-09 Consultar historial propio" as CU09
+  usecase "CU-10 Gestionar productos" as CU10
+  usecase "CU-11 Actualizar stock" as CU11
+  usecase "CU-12 Gestionar proveedores" as CU12
+  usecase "CU-13 Generar orden de compra" as CU13
+  usecase "CU-14 Consultar historial a proveedores" as CU14
+  usecase "CU-15 Ver reporte de ventas" as CU15
+  usecase "CU-16 Ver productos más vendidos" as CU16
+  usecase "CU-17 Gestionar usuarios" as CU17
+}
+
+Cliente --> CU01
+Cliente --> CU02
+Cliente --> CU03
+Cliente --> CU04
+Cliente --> CU05
+Cliente --> CU06
+Cliente --> CU08
+Cliente --> CU09
+
+CU06 ..> CU07 : <<include>>
+CU06 ..> CU08 : <<extend>>
+CU07 --> MP
+
+Vendedor --> CU04
+Vendedor --> CU10
+Stock --> CU04
+Stock --> CU10
+Stock --> CU11
+Stock --> CU13
+
+Administrador --> CU04
+Administrador --> CU10
+Administrador --> CU12
+Administrador --> CU13
+Administrador --> CU14
+Administrador --> CU15
+Administrador --> CU16
+Administrador --> CU17
+
+@enduml
 ' --- Actores ---
 actor "[Actor principal]" as A1
 actor "[Actor secundario]" as A2
