@@ -26,7 +26,7 @@ Interesados identificados a partir del relevamiento y análisis preliminar de Ab
 | Stakeholder | Rol | Interés en el proyecto |
 | ----------- | --- | ----------------------- |
 | Grupo de desarrollo | Analistas funcionales / desarrolladores (ver [integrantes.md](/integrantes.md)) | Relevar requisitos, diseñar y documentar la solución web. |
-| Docente Pedernera Pablo | Docente de la materia Diseño de Sistemas Web | Evaluación y seguimiento de las entregas del trabajo práctico anual. |
+| Docente Pedernera Pablo | Docente de la materia Desarrollo de Sistemas Web | Evaluación y seguimiento de las entregas del trabajo práctico anual. |
 
 ## Notas del relevamiento
 

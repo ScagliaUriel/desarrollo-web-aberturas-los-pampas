@@ -1,8 +1,10 @@
 # Aberturas Los Pampas — Grupo []
 
-> Materia: Diseño de Sistemas Web — Analista Funcional de Sistemas  
-> Institución: Terciario Urquiza — Rosario  
-> Docente: Pedernera Pablo  
+> Carrera: Análisis Funcional de Sistemas Informáticos
+> Materia: Desarrollo de Sistemas Web
+> Comisión: 3°1°
+> Institución: Terciario Urquiza
+> Docente: Pedernera, Pablo
 > Cuatrimestre: 2.° 2026
 
 ## Integrantes
