@@ -49,5 +49,5 @@ Este diagnóstico es la base sobre la que el equipo releva requisitos, define hi
 | Entrega | Descripción | Fecha | Estado |
 |---------|-------------|-------|--------|
 | EP-01 | Stakeholders + Requisitos | 19/08/2026 | Entregado |
-| EP-02 | Casos de Uso e Historias de Usuario | | Pendiente |
+| EP-02 | Casos de Uso e Historias de Usuario | 02/09/2026 | Entregado |
 | Final | Versión definitiva | | Pendiente |
