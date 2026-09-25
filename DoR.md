@@ -44,7 +44,8 @@ considerarse "lista para trabajar". Si no las cumple, vuelve a refinamiento._
 | 3 | **Sí** | Las credenciales Sandbox de Mercado Pago están creadas. |
 | 4 | **Sí** | Pantalla de confirmación de pedido y redirección maquetada. |
 | 5 | **Sí** | Estimada en 8 Story Points por el equipo. |
-| 6 | **Sí** | Aporta valor directo y es de alcance delimitado. |
+| 6 | **Sí** | Los 6 criterios INVEST fueron evaluados en `docs/historias-de-usuario.md` (HU-04); "Independiente" se justifica por no depender de otras historias, solo de que exista una orden generada. |
+| 7 | **Sí** | Mensajes definidos: pago rechazado deja la orden en *"Pendiente de pago"* sin borrarla; pago aprobado dispara el envío del comprobante. |
 
 ---
 
