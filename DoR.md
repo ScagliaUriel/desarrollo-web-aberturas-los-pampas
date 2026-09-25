@@ -54,8 +54,11 @@ considerarse "lista para trabajar". Si no las cumple, vuelve a refinamiento._
 | Ítem (según checklist) | ¿Pasa? | Qué le falta (si no pasa) |
 |-------------------------|--------|-----------------------------|
 | 1 | **Sí** | Formato de historia definido correctamente. |
-| 2 | **No** | Falta definir las opciones permitidas de materiales y tipos de vidrio. |
+| 2 | **Sí** | Los criterios de aceptación de HU-03 ya especifican material y tipo de vidrio como campos del formulario, y el límite de dimensiones (mínimo 0.50m). |
 | 3 | **Sí** | No presenta bloqueos de infraestructura. |
-| 4 | **No** | Falta el maquetado del formulario de ingreso de dimensiones. |
-| 5 | **No** | El equipo no pudo estimarla por falta de definición en los campos. |
-| 6 | **Sí** | Aporta valor de negocio pero requiere refinamiento. |
+| 4 | **No** | Falta el maquetado del formulario de ingreso de dimensiones, material y tipo de vidrio. |
+| 5 | **Sí** | Estimada en 5 Story Points por el equipo (ver `docs/historias-de-usuario.md`, HU-03). |
+| 6 | **Sí** | Los 6 criterios INVEST fueron evaluados en HU-03; todos se cumplen. |
+| 7 | **No** | Falta definir el mensaje exacto para el caso "dimensiones válidas sin plano adjunto" (hoy solo queda "Pendiente de revisión técnica", sin aviso al cliente). |
+
+**Conclusión:** a diferencia de la devolución anterior, HU-03 ya pasa 6 de 7 ítems — el único bloqueo real para entrar a sprint es el maquetado del formulario (ítem 4) y precisar el mensaje del ítem 7.
