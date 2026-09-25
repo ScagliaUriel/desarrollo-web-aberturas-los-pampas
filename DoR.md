@@ -27,10 +27,11 @@ considerarse "lista para trabajar". Si no las cumple, vuelve a refinamiento._
 |-------------------------|--------|-----------------------------|
 | 1 | **Sí** | Estructurada correctamente con rol, acción y beneficio. |
 | 2 | **Sí** | Definidos explícitamente en formato Dado/Cuando/Entonces. |
-| 3 | **Sí** | La estructura del catálogo base se encuentra definida. |
-| 4 | **Sí** | Se definieron la barra de búsqueda y filtros por material. |
+| 3 | **Sí** | El catálogo base (RF-04/05/06) ya está desarrollado como prerrequisito, así que no bloquea el filtrado. |
+| 4 | **Sí** | Se definieron la barra de búsqueda y los filtros por material y categoría en el wireframe de catálogo. |
 | 5 | **Sí** | Estimada en 3 Story Points por el equipo. |
-| 6 | **Sí** | Es pequeña, independiente y verificable. |
+| 6 | **Sí** | Los 6 criterios INVEST fueron evaluados uno por uno en `docs/historias-de-usuario.md` (HU-02); todos se cumplen. |
+| 7 | **Sí** | Mensajes definidos: *"No se encontraron aberturas que coincidan con la búsqueda"* y etiqueta *"Sin stock"*. |
 
 ---
 
