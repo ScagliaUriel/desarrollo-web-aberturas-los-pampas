@@ -15,8 +15,8 @@ considerarse "lista para trabajar". Si no las cumple, vuelve a refinamiento._
 | 3 | Las dependencias técnicas y funcionales están identificadas y resueltas previo al sprint. | Previene bloqueos durante el desarrollo por falta de integraciones o servicios requeridos. |
 | 4 | Los requerimientos de interfaz, campos del formulario y comportamientos de la vista están especificados. | Garantiza que la maquetación y el desarrollo no requieran adivinar campos en el sprint. |
 | 5 | La historia ha sido estimada en puntos de historia (Story Points) por el equipo. | Asegura que la tarea se adapte a la capacidad real del equipo en el ciclo de trabajo. |
-| 6 | La historia respeta la validación del principio INVEST. | Garantiza que las historias sean abordables, pequeñas y verificables dentro de un sprint. |
-
+| 6 | La historia respeta la validación del principio INVEST (se evalúan sus 6 criterios y se documenta la observación de cada uno). | Garantiza que las historias sean independientes, pequeñas y verificables dentro de un sprint; evita marcar "Sí" sin justificar cada criterio. |
+| 7 | Se identifican los datos de entrada y los mensajes de error/validación esperados. | Cubre los flujos alternativos y de excepción antes del desarrollo, evitando que el equipo tenga que inventar mensajes o validaciones durante el sprint. |
 ---
 
 ## Aplicación a tres historias propias
