@@ -1,166 +1,151 @@
 # Historias de usuario
 
-_Presentar al menos una historia de usuario representativa por módulo._
-_Cada historia debe incluir formato clásico, criterios de aceptación y validación INVEST._
-
 ---
 
 ## HU-01 — Registro e inicio de sesión de usuario
 
 | Campo | Detalle |
 |-------|---------|
-| Historia | Como cliente minorista o mayorista, quiero registrarme e iniciar sesión con e-mail y contraseña, para acceder a mi perfil, guardar direcciones y consultar mi historial. |
+| Historia | Como cliente minorista o mayorista, quiero registrarme e iniciar sesión con correo y clave, para acceder a mi perfil y guardar mis datos de facturación. |
 | Módulo | Autenticación y Clientes |
 | Requisitos relacionados | RF-01, RF-02, RF-03 |
 
 ### Criterios de aceptación
-
-1. **Dado** que el cliente ingresa un e-mail no registrado y clave de 8+ caracteres, **cuando** presiona "Registrarse", **entonces** el sistema crea la cuenta y redirige a su perfil.
-2. **Dado** que el cliente ingresa un e-mail ya existente, **cuando** envía el formulario, **entonces** el sistema bloquea el registro e indica *"El e-mail ya se encuentra registrado"*.
-3. **Dado** que un usuario ingresa credenciales válidas, **cuando** hace clic en "Iniciar sesión", **entonces** el sistema otorga acceso según su rol (Cliente o Administrador).
-
-### Validación INVEST
-
-| Criterio | ¿Se cumple? | Observación |
-|----------|-------------|-------------|
-| Independiente | Sí | Se puede implementar sin depender del checkout ni del catálogo. |
-| Negociable | Sí | Los campos del formulario de registro se pueden ajustar según necesidad. |
-| Valiosa | Sí | Permite identificar al cliente y asociar sus compras. |
-| Estimable | Sí | Complejidad técnica baja, estimada en 3 Story Points. |
-| Pequeña | Sí | Se desarrolla dentro de un solo sprint. |
-| Verificable | Sí | Se valida mediante pruebas de autenticación de usuarios. |
-
----
-
-## HU-02 — Consulta y filtrado de aberturas en el catálogo
-
-| Campo | Detalle |
-|-------|---------|
-| Historia | Como cliente, quiero filtrar el catálogo online por material y categoría, para encontrar rápidamente el producto adecuado para mi obra. |
-| Módulo | Catálogo y Productos |
-| Requisitos relacionados | RF-04, RF-05, RF-06 |
-
-### Criterios de aceptación
-
-1. **Dado** que el cliente navega por la tienda, **cuando** aplica los filtros "Ventanas" y "Aluminio", **entonces** el catálogo exhibe solo los productos que cumplen ambos criterios.
-2. **Dado** que el cliente busca una combinación sin existencias, **cuando** ejecuta la búsqueda, **entonces** el sistema muestra *"No se encontraron aberturas que coincidan con la búsqueda"*.
-3. **Dado** que un producto no posee stock disponible, **cuando** se muestra en la grilla, **entonces** exhibe la etiqueta *"Sin stock"* y deshabilita la compra.
+1. **Dado** que el cliente ingresa un e-mail no registrado y una clave válida, **cuando** hace clic en "Registrarse", **entonces** el sistema crea la cuenta y le envía un correo de bienvenida.
+2. **Dado** que el cliente ingresa un e-mail que ya existe, **cuando** presiona "Registrarse", **entonces** el sistema muestra *"El correo electrónico ya se encuentra registrado"*.
+3. **Dado** que el usuario ingresa credenciales válidas, **cuando** hace clic en "Iniciar sesión", **entonces** el sistema le otorga acceso y redirige según su rol.
 
 ### Validación INVEST
 
 | Criterio | ¿Se cumple? | Observación |
 |----------|-------------|-------------|
-| Independiente | Sí | Depende de la base de datos de productos pero no de otros módulos. |
-| Negociable | Sí | Los filtros se pueden ampliar a medidas o marcas. |
-| Valiosa | Sí | Mejora la experiencia de búsqueda y la conversión de ventas. |
+| Independiente | Sí | No requiere de otros módulos desarrollados para funcionar. |
+| Negociable | Sí | Los datos obligatorios del perfil pueden ser ajustados. |
+| Valiosa | Sí | Aporta valor indispensable para la identificación del usuario. |
 | Estimable | Sí | Estimada en 3 Story Points. |
-| Pequeña | Sí | Lógica de lectura y filtrado acotada. |
-| Verificable | Sí | Se comprueba aplicando combinaciones de filtros en la interfaz. |
+| Pequeña | Sí | Abordable dentro de un solo sprint. |
+| Verificable | Sí | Se comprueba probando casos de éxito y credenciales duplicadas/inválidas. |
 
 ---
 
-## HU-03 — Cotización de aberturas a medida
+## HU-02 — Control de acceso por roles y auditoría de acciones
 
 | Campo | Detalle |
 |-------|---------|
-| Historia | Como cliente o profesional de la construcción, quiero solicitar el presupuesto de una abertura con dimensiones personalizadas, para obtener un costo exacto para productos fuera de catálogo. |
-| Módulo | Cotizaciones a Medida |
-| Requisitos relacionados | RF-23 |
+| Historia | Como administrador, quiero controlar el acceso a los paneles mediante roles y registrar las acciones críticas, para garantizar la seguridad operativa. |
+| Módulo | Usuarios y Seguridad |
+| Requisitos relacionados | RF-04, RF-05 |
 
 ### Criterios de aceptación
-
-1. **Dado** que el cliente completa alto, ancho, material y tipo de vidrio, **cuando** confirma la solicitud, **entonces** el sistema genera una solicitud de cotización N° X y notifica al área de ventas.
-2. **Dado** que el cliente ingresa dimensiones menores al límite de producción (ej. menor a 0.50m), **cuando** intenta enviar, **entonces** el sistema muestra *"Las dimensiones están fuera del rango estándar de fabricación"*.
-3. **Dado** que las dimensiones son válidas pero no se adjunta plano, **cuando** envía la solicitud, **entonces** el sistema procesa el pedido marcándolo como "Pendiente de revisión técnica".
+1. **Dado** que un usuario con rol "Vendedor" intenta ingresar a la sección de administración de usuarios, **cuando** navega a la URL, **entonces** el sistema deniega el acceso y muestra *"No posee permisos para acceder a esta sección"*.
+2. **Dado** que un usuario modifica el precio o stock de un producto, **cuando** guarda la operación, **entonces** el sistema genera una entrada en el log de auditoría.
 
 ### Validación INVEST
 
 | Criterio | ¿Se cumple? | Observación |
 |----------|-------------|-------------|
-| Independiente | Sí | Es autónoma del proceso de compra de productos en stock. |
-| Negociable | Sí | Los campos obligatorios de la cotización son adaptables. |
-| Valiosa | Sí | Resuelve una necesidad central identificada en el relevamiento comercial. |
+| Independiente | No | Depende de que existan los módulos de usuarios y productos para auditar. |
+| Negociable | Sí | La lista de acciones a auditar es parametrizable. |
+| Valiosa | Sí | Imparable para el control interno de los propietarios del negocio. |
 | Estimable | Sí | Estimada en 5 Story Points. |
-| Pequeña | Sí | Alcance limitado al envío del formulario y registro del ticket. |
-| Verificable | Sí | Se prueba enviando datos válidos e inválidos desde la interfaz. |
+| Pequeña | Sí | Se limita al middleware de roles y la tabla de auditoría. |
+| Verificable | Sí | Se verifica realizando cambios administrativos y consultando el log. |
 
 ---
 
-## HU-04 — Pago de pedidos con pasarela digital
+## HU-03 — Consulta y filtrado de aberturas en el catálogo
 
 | Campo | Detalle |
 |-------|---------|
-| Historia | Como cliente, quiero pagar mi pedido mediante Mercado Pago, para abonar de forma digital y confirmar mi compra inmediatamente. |
-| Módulo | Ventas y Checkout |
-| Requisitos relacionados | RF-07, RF-08, RF-09 |
+| Historia | Como cliente, quiero filtrar las aberturas por material y categoría, para encontrar rápidamente el producto que busco. |
+| Módulo | Catálogo y Productos |
+| Requisitos relacionados | RF-06, RF-07, RF-08 |
 
 ### Criterios de aceptación
-
-1. **Dado** que el cliente finaliza el carrito y selecciona Mercado Pago, **cuando** la pasarela aprueba la transacción, **entonces** el pedido pasa a estado "Pagado" y se descuenta el stock.
-2. **Dado** que la tarjeta es rechazada o no posee saldo, **cuando** la pasarela notifica el error, **entonces** el pedido queda en "Pendiente de pago" y permite reintentar sin borrar la orden.
-3. **Dado** que el pago es aprobado, **cuando** la pasarela confirma el cobro, **entonces** el sistema emite el comprobante y lo envía por e-mail al cliente.
+1. **Dado** que el cliente aplica los filtros "Ventanas" y "Aluminio", **cuando** los ejecuta, **entonces** el catálogo muestra únicamente los productos que coinciden.
+2. **Dado** que una consulta no arroja coincidencia, **cuando** finaliza la búsqueda, **entonces** el sistema muestra *"No se encontraron aberturas que coincidan con la búsqueda"*.
 
 ### Validación INVEST
 
 | Criterio | ¿Se cumple? | Observación |
 |----------|-------------|-------------|
-| Independiente | Sí | Se conecta mediante API con la pasarela de cobros. |
-| Negociable | Sí | Los medios de pago aceptados los gestiona la pasarela. |
-| Valiosa | Sí | Es la funcionalidad principal de cobranza para la tienda e-commerce. |
+| Independiente | Sí | Lee datos de la base sin depender de la lógica de pagos. |
+| Negociable | Sí | Se pueden agregar más filtros en el futuro. |
+| Valiosa | Sí | Mejora la experiencia de navegación del cliente. |
+| Estimable | Sí | Estimada en 3 Story Points. |
+| Pequeña | Sí | Consulta con filtros acotada. |
+| Verificable | Sí | Se valida aplicando distintas combinaciones de búsqueda. |
+
+---
+
+## HU-04 — Solicitud de cotización de aberturas a medida
+
+| Campo | Detalle |
+|-------|---------|
+| Historia | Como cliente mayorista o profesional, quiero solicitar el presupuesto de una abertura con dimensiones especiales y adjuntar planos, para obtener una cotización personalizada. |
+| Módulo | Cotizaciones a Medida |
+| Requisitos relacionados | RF-09 |
+
+### Criterios de aceptación
+1. **Dado** que el cliente completa ancho, alto, material, vidrio y adjunta plano, **cuando** presiona "Solicitar cotización", **entonces** el sistema genera el ticket en estado "Pendiente de revisión".
+2. **Dado** que el cliente ingresa medidas fuera del rango de fabricación, **cuando** intenta enviar, **entonces** el sistema muestra *"Las dimensiones están fuera del rango estándar de fabricación"*.
+
+### Validación INVEST
+
+| Criterio | ¿Se cumple? | Observación |
+|----------|-------------|-------------|
+| Independiente | Sí | Funciona como un canal independiente del e-commerce estándar. |
+| Negociable | Sí | Los formatos de archivos adjuntos pueden ampliarse. |
+| Valiosa | Sí | Abre el canal comercial clave para constructoras y arquitectos. |
+| Estimable | Sí | Estimada en 5 Story Points. |
+| Pequeña | No | Requiere formulario, carga de archivos y panel de gestión de cotizaciones. |
+| Verificable | Sí | Se comprueba enviando solicitudes con y sin planos adjuntos. |
+
+---
+
+## HU-05 — Pago digital de compras y emisión de comprobante
+
+| Campo | Detalle |
+|-------|---------|
+| Historia | Como cliente, quiero pagar mi pedido mediante Mercado Pago, para confirmar la compra de forma inmediata. |
+| Módulo | Ventas y Checkout |
+| Requisitos relacionados | RF-10, RF-11, RF-12 |
+
+### Criterios de aceptación
+1. **Dado** que el cliente paga con éxito en la pasarela, **cuando** Mercado Pago aprueba la transacción, **entonces** el pedido pasa a "Pagado", se descuenta el stock y se envía el comprobante.
+2. **Dado** que el pago es denegado, **cuando** la pasarela notifica el rechazo, **entonces** el pedido queda en "Pendiente de pago".
+
+### Validación INVEST
+
+| Criterio | ¿Se cumple? | Observación |
+|----------|-------------|-------------|
+| Independiente | Sí | Se integra como un servicio externo aislado. |
+| Negociable | Sí | Las opciones de cobro dependen de las habilitadas en la API. |
+| Valiosa | Sí | Es el flujo central para monetizar la plataforma online. |
 | Estimable | Sí | Estimada en 8 Story Points. |
-| Pequeña | Sí | Se limita a la integración e interpretación del checkout. |
+| Pequeña | Sí | Limitada al flujo de checkout e integración Webhook. |
 | Verificable | Sí | Se valida utilizando las credenciales de prueba en entorno Sandbox. |
 
 ---
 
-## HU-05 — Control e inventario automático de stock
+## HU-06 — Seguimiento del estado logístico del pedido
 
 | Campo | Detalle |
 |-------|---------|
-| Historia | Como encargado de depósito, quiero que el inventario se descuente automáticamente con cada compra web, para mantener las existencias reales sincronizadas. |
-| Módulo | Depósito y Stock |
-| Requisitos relacionados | RF-14, RF-15 |
+| Historia | Como cliente, quiero consultar el estado de mi pedido desde mi panel, para conocer cuándo recibiré o podré retirar mi compra. |
+| Módulo | Ventas y Logística |
+| Requisitos relacionados | RF-13 |
 
 ### Criterios de aceptación
-
-1. **Dado** que una compra por 2 unidades de un portón es aprobada, **cuando** el sistema procesa el pago, **entonces** descuenta 2 unidades del inventario en tiempo real.
-2. **Dado** que una venta deja un producto por debajo del umbral mínimo de seguridad, **cuando** se actualiza el stock, **entonces** el sistema emite una alerta de reposición.
-3. **Dado** que se cancela un pedido no abonado, **cuando** se vence el plazo de reserva, **entonces** el sistema restituye las unidades al inventario.
+1. **Dado** que deposito actualiza el pedido a "Despachado", **cuando** el cliente ingresa a su historial, **entonces** el sistema refleja el nuevo estado.
 
 ### Validación INVEST
 
 | Criterio | ¿Se cumple? | Observación |
 |----------|-------------|-------------|
-| Independiente | Sí | Es un evento que responde a la confirmación de la venta. |
-| Negociable | Sí | El umbral de stock mínimo se puede parametrizar por producto. |
-| Valiosa | Sí | Evita la sobreventa y los quiebres de stock físicos. |
-| Estimable | Sí | Estimada en 3 Story Points. |
-| Pequeña | Sí | Actualización directa en la capa de datos. |
-| Verificable | Sí | Se verifica comparando el stock antes y después de una orden. |
-
----
-
-## HU-06 — Gestión de órdenes de compra a proveedores
-
-| Campo | Detalle |
-|-------|---------|
-| Historia | Como administrador, quiero emitir y consultar órdenes de compra dirigidas a proveedores, para gestionar el reabastecimiento de aberturas de forma organizada. |
-| Módulo | Proveedores |
-| Requisitos relacionados | RF-16, RF-17, RF-18 |
-
-### Criterios de aceptación
-
-1. **Dado** que el administrador selecciona un proveedor y los ítems requeridos, **cuando** genera la orden, **entonces** el sistema emite el documento en estado "Pendiente de entrega".
-2. **Dado** que un proveedor se encuentra inactivo, **cuando** se redacta una nueva orden, **entonces** el sistema no lo despliega en la lista de proveedores seleccionables.
-3. **Dado** que se registra la recepción de la mercadería, **cuando** el encargado de depósito confirma el remito, **entonces** la orden cambia a "Completada" y se incrementa el stock.
-
-### Validación INVEST
-
-| Criterio | ¿Se cumple? | Observación |
-|----------|-------------|-------------|
-| Independiente | Sí | Módulo administrativo aislado del e-commerce público. |
-| Negociable | Sí | La estructura del documento impreso o digital se puede adaptar. |
-| Valiosa | Sí | Formaliza la relación y pedidos de reabastecimiento con los fabricantes. |
-| Estimable | Sí | Estimada en 5 Story Points. |
-| Pequeña | Sí | Es una gestión CRUD con generación de comprobantes. |
-| Verificable | Sí | Se comprueba emitiendo y listando órdenes de compra en el panel. |
+| Independiente | Sí | Es una consulta de lectura sobre las órdenes del cliente. |
+| Negociable | Sí | Se pueden sumar notificaciones push en el futuro. |
+| Valiosa | Sí | Reduce consultas sobre el estado del envío. |
+| Estimable | Sí | Estimada en 2 Story Points. |
+| Pequeña | Sí | Es la visualización de un estado dentro de la tabla. |
+| Verificable | Sí | Se comprueba modificando el estado desde el panel interno. |
