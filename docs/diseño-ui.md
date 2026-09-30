@@ -1,62 +1,39 @@
-# Diseño de UI
+# Diseño UI
 
-Descripción de las pantallas principales del sistema web. Los wireframes correspondientes se encuentran en [`/diagramas/wireframes`](../diagramas/wireframes).
+## Cobertura de Wireframes
+Los wireframes de la plataforma están organizados y referenciados en `diagramas/wireframes/`:
+- `01-home-catalogo.svg`: Grilla de catálogo con filtros.
+- `02-ficha-producto.svg`: Detalle de producto y selector de cotización a medida.
+- `03-carrito.svg`: Listado de compra y solicitud de instalación.
+- `04-checkout-pago.svg`: Formulario de datos y pago.
+- `05-cuenta-cliente.svg`: Historial de pedidos del cliente.
+- `06-login-interno.svg`: Acceso al personal.
+- `07-gestion-productos-stock.svg`: Panel de control de inventario.
+- `08-gestion-proveedores.svg`: Registro de proveedores.
+- `09-gestion-pedidos-ventas.svg`: Control de pedidos en depósito/ventas.
+- `10-reportes.svg`: Métricas generales.
+- `11-cotizacion-a-medida.svg`: Formulario para pedidos a medida.
 
-## Sitio público (clientes)
+---
 
-### 1. Home / Catálogo
-- Grilla de productos con imagen, nombre, tipo, material y precio.
-- Filtros por tipo de abertura (portón, puerta, ventana, reja, cortina) y por material (chapa, madera, aluminio, hierro).
-- Buscador por texto.
-- Accesos a redes sociales de la empresa (Facebook, Instagram).
+## Patrones de diseño aplicados
 
-### 2. Ficha de producto
-- Detalle: características, especificaciones, precio, disponibilidad de stock.
-- Opción "a medida" cuando el producto lo admite, con campo para indicar dimensiones.
-- Botón "Agregar al carrito".
-- Aviso de plazo de entrega estimado cuando el producto no tiene stock disponible.
+### 1. Catálogo público de aberturas
+* **Patrones:** *Grid View*, *Card*, *Faceted Search*.
+* **Justificación:** Las Cards presentan fotos, precios y etiquetas de stock de forma rápida. El filtrado agiliza la localización de aberturas.
 
-### 3. Carrito de compras
-- Listado de productos agregados, cantidad y subtotal.
-- Opción de solicitar instalación por producto.
-- Botón "Confirmar compra".
+### 2. Formulario de Cotización a Medida
+* **Patrones:** *Input Form*, *File Uploader*, *Inline Validation*.
+* **Justificación:** Permite al usuario cargar dimensiones en metros y adjuntar el archivo del plano con validación visual en tiempo real.
 
-### 4. Checkout / Pago
-- Resumen del pedido y total.
-- Datos de envío/instalación.
-- Botón de pago que deriva a Mercado Pago.
-- Pantalla de confirmación según el resultado del pago.
+### 3. Checkout y Pago
+* **Patrones:** *Step-by-Step Wizard*, *Modal Window*.
+* **Justificación:** Divide el proceso en pasos claros para reducir errores y abandono de compra.
 
-### 5. Cuenta del cliente
-- Datos personales (o de la empresa, si es mayorista).
-- Historial de pedidos con estado (pendiente de pago / pagado / entregado).
-- Estado de instalaciones solicitadas.
+---
 
-## Panel interno (vendedor / stock / administrador)
+## Accesibilidad concreta (WCAG 2.1)
 
-### 6. Login interno
-- Acceso diferenciado por usuario y contraseña, con rol asignado (vendedor, stock, administrador).
-
-### 7. Gestión de productos y stock
-- ABM de productos (alta, baja, modificación).
-- Edición de cantidades en stock.
-- Alertas de stock bajo o agotado.
-
-### 8. Gestión de proveedores
-- ABM de proveedores y sus datos de facturación.
-- Generación de órdenes de compra, con selección de productos, cantidades y plazo de entrega.
-- Historial de compras por proveedor.
-
-### 9. Gestión de pedidos y ventas
-- Listado de pedidos con filtro por estado.
-- Detalle de cada pedido (productos, cliente, pago, instalación).
-
-### 10. Reportes
-- Ventas del mes (totales, cantidad de pedidos).
-- Productos más vendidos, para apoyar decisiones de compra a proveedores.
-
-## Lineamientos generales
-
-- Diseño simple y con lenguaje claro, considerando que el personal actual no tiene experiencia previa con sistemas de gestión.
-- Prioridad mobile-first en el sitio público, ya que buena parte de los clientes (minoristas) probablemente naveguen desde el celular.
-- El panel interno debe minimizar la posibilidad de error dado que hoy no hay usuarios diferenciados ni capacitación en el uso de sistemas.
+1. **Contraste de color:** Relación de contraste mínima de 4.5:1 en todos los textos sobre fondos claros.
+2. **Áreas táctiles (Tap Targets):** Botones y campos en formato mobile con un tamaño mínimo de 48x48 píxeles.
+3. **Navegación por teclado:** Soporte de recorrido por formularios usando `Tab` y `Enter`.
