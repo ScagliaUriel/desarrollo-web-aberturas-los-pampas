@@ -13,11 +13,11 @@ El código PlantUML del diagrama general se encuentra guardado en `diagramas/cas
 
 ---
 
-## CU-06 — Realizar Compra Online (Checkout)
+## CU-04 — Realizar Compra Online (Checkout)
 
 | Campo | Detalle |
 |-------|---------|
-| Identificador | CU-06 |
+| Identificador | CU-04 |
 | Nombre | Realizar Compra Online |
 | Descripción | El cliente selecciona productos del carrito, confirma la dirección de envío y procede a la instancia de pago. |
 | Actores | Principal: Cliente / Secundario: Pasarela de Pago |
@@ -29,7 +29,7 @@ El código PlantUML del diagrama general se encuentra guardado en `diagramas/cas
 | # | Acción (actor) | Reacción (sistema) |
 |---|----------------|--------------------|
 | 1 | El cliente presiona "Iniciar Checkout" desde el carrito de compras. | El sistema solicita confirmación del domicilio de entrega y método de envío. |
-| 2 | El cliente selecciona la dirección y presiona "Ir a pagar". | El sistema invoca al caso de uso CU-07 (Procesar Pago) redireccionando a la pasarela. |
+| 2 | El cliente selecciona la dirección y presiona "Ir a pagar". | El sistema invoca al caso de uso CU-05 (Procesar Pago Digital) redireccionando a la pasarela. |
 | 3 | El cliente completa los datos de pago y confirma la transacción. | El sistema recibe la notificación de cobro aprobado (Webhook), marca la orden como "Pagada" y descuenta las unidades del inventario. |
 | 4 | El cliente visualiza la pantalla de confirmación. | El sistema envía la factura digital por correo electrónico. |
 
@@ -49,11 +49,11 @@ El código PlantUML del diagrama general se encuentra guardado en `diagramas/cas
 
 ---
 
-## CU-07 — Procesar Pago Digital
+## CU-05 — Procesar Pago Digital
 
 | Campo | Detalle |
 |-------|---------|
-| Identificador | CU-07 |
+| Identificador | CU-05 |
 | Nombre | Procesar Pago Digital |
 | Descripción | Integra la API de Mercado Pago para efectuar el cobro con tarjeta o dinero en cuenta de manera segura. |
 | Actores | Principal: Cliente / Secundario: Pasarela de Pago (Mercado Pago) |
@@ -83,11 +83,11 @@ El código PlantUML del diagrama general se encuentra guardado en `diagramas/cas
 
 ---
 
-## CU-13 — Emitir Orden de Compra a Proveedor
+## CU-10 — Emitir Orden de Compra a Proveedor
 
 | Campo | Detalle |
 |-------|---------|
-| Identificador | CU-13 |
+| Identificador | CU-10 |
 | Nombre | Emitir Orden de Compra a Proveedor |
 | Descripción | Permite al administrador o vendedor generar una solicitud de reposición de mercadería hacia los fabricantes. |
 | Actores | Principal: Vendedor / Administrador |
