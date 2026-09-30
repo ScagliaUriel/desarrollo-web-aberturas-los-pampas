@@ -1,63 +1,42 @@
-@startuml casos-de-uso
-
-title Casos de Uso — Aberturas Los Pampas
-
+@startuml
 left to right direction
 skinparam packageStyle rectangle
 
-actor Cliente
-actor Vendedor
-actor "Encargado de Stock" as Stock
-actor Administrador
-actor "Mercado Pago" as MP
+actor "Cliente" as cli
+actor "Vendedor" as ven
+actor "Encargado de Depósito" as dep
+actor "Administrador" as admin
+actor "Pasarela de Pago" as pas
 
-rectangle "Sistema Web - Aberturas Los Pampas" {
-  usecase "CU-01 Consultar catálogo" as CU01
-  usecase "CU-02 Filtrar / buscar productos" as CU02
-  usecase "CU-03 Registrarse" as CU03
-  usecase "CU-04 Iniciar sesión" as CU04
-  usecase "CU-05 Agregar al carrito" as CU05
-  usecase "CU-06 Confirmar compra" as CU06
-  usecase "CU-07 Pagar con Mercado Pago" as CU07
-  usecase "CU-08 Solicitar instalación" as CU08
-  usecase "CU-09 Consultar historial propio" as CU09
-  usecase "CU-10 Gestionar productos" as CU10
-  usecase "CU-11 Actualizar stock" as CU11
-  usecase "CU-12 Gestionar proveedores" as CU12
-  usecase "CU-13 Generar orden de compra" as CU13
-  usecase "CU-14 Consultar historial a proveedores" as CU14
-  usecase "CU-15 Ver reporte de ventas" as CU15
-  usecase "CU-16 Ver productos más vendidos" as CU16
-  usecase "CU-17 Gestionar usuarios" as CU17
+rectangle "Plataforma Aberturas Los Pampas" {
+  usecase "CU-01: Registrarse e Iniciar Sesión" as CU1
+  usecase "CU-02: Consultar Catálogo y Filtrar" as CU2
+  usecase "CU-03: Solicitar Cotización a Medida" as CU3
+  usecase "CU-04: Realizar Compra Online" as CU4
+  usecase "CU-05: Procesar Pago Digital" as CU5
+  usecase "CU-06: Consultar Estado de Pedido" as CU6
+  usecase "CU-07: Gestionar Cotizaciones" as CU7
+  usecase "CU-08: Coordinar Instalación Técnica" as CU8
+  usecase "CU-09: Gestionar Stock e Inventario" as CU9
+  usecase "CU-10: Emitir Orden de Compra" as CU10
+  usecase "CU-11: Administrar Usuarios y Roles" as CU11
+  usecase "CU-12: Consultar Log de Auditoría" as CU12
 }
 
-Cliente --> CU01
-Cliente --> CU02
-Cliente --> CU03
-Cliente --> CU04
-Cliente --> CU05
-Cliente --> CU06
-Cliente --> CU08
-Cliente --> CU09
+cli --> CU1
+cli --> CU2
+cli --> CU3
+cli --> CU4
+cli --> CU6
+cli --> CU8
 
-CU06 ..> CU07 : <<include>>
-CU06 ..> CU08 : <<extend>>
-CU07 --> MP
+CU4 .> CU5 : <<include>>
+CU2 <.. CU3 : <<extend>>
 
-Vendedor --> CU04
-Vendedor --> CU10
-Stock --> CU04
-Stock --> CU10
-Stock --> CU11
-Stock --> CU13
-
-Administrador --> CU04
-Administrador --> CU10
-Administrador --> CU12
-Administrador --> CU13
-Administrador --> CU14
-Administrador --> CU15
-Administrador --> CU16
-Administrador --> CU17
-
+CU5 -- pas
+ven --> CU7
+ven --> CU10
+dep --> CU9
+admin --> CU11
+admin --> CU12
 @enduml
