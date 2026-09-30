@@ -1,110 +1,37 @@
 # Modelo Entidad-Relación
 
-Modelo de datos preliminar derivado de los requisitos funcionales del sistema. Diagrama fuente en [`/diagramas/er.puml`](../diagramas/er.puml).
+## Diagrama
+El código PlantUML del modelo se encuentra en `diagramas/er.puml`.
 
-## Entidades
+---
 
-### Usuario
-| Campo | Tipo | Descripción |
-| ----- | ---- | ----------- |
-| id_usuario | PK | Identificador único |
-| nombre | string | Nombre completo |
-| email | string | Usado para login |
-| contraseña | string | Hasheada |
-| rol | enum | cliente / vendedor / stock / administrador |
+## Entidades principales
 
-### Cliente
-| Campo | Tipo | Descripción |
-| ----- | ---- | ----------- |
-| id_cliente | PK | Identificador único |
-| id_usuario | FK → Usuario | Cuenta asociada |
-| tipo_cliente | enum | minorista / mayorista |
-| razon_social | string | Solo mayoristas (ferreterías, corralones, constructoras, estudios de arquitectura, etc.) |
-| cuit | string | Opcional, para facturación a mayoristas |
-| dirección | string | Dirección de envío/instalación |
+| Entidad | Descripción | Relaciones clave |
+|---------|-------------|------------------|
+| **Usuario** | Almacena datos personales, accesos y perfil comercial (minorista/mayorista). | Pertenece a un `Rol`. Posee muchos `Pedido` y `SolicitudCotizacion`. |
+| **Producto** | Registra las aberturas del catálogo con sus precios, stock y especificaciones. | Pertenece a una `Categoria` y un `Proveedor`. Se relaciona con `DetallePedido`. |
+| **SolicitudCotizacion** | Guarda las solicitudes de aberturas a medida con dimensiones, materiales y planos adjuntos. | Asociada a un `Usuario` cliente. |
+| **Pedido** | Registra la cabecera de la transacción de compra, estado de pago y envío. | Pertenece a un `Usuario`. Contiene varios `DetallePedido` y opcionalmente una `Instalacion`. |
+| **DetallePedido** | Almacena los ítems comprados conservando el precio histórico de la operación. | Asocia un `Pedido` con un `Producto`. |
+| **Instalacion** | Modela el servicio adicional de colocación de aberturas contratado para un pedido. | Relación de 1 a 1 opcional con `Pedido`. |
+| **OrdenCompra** | Documenta los pedidos de reabastecimiento enviados a los fabricantes. | Relacionada a un `Proveedor`. |
 
-### Producto
-| Campo | Tipo | Descripción |
-| ----- | ---- | ----------- |
-| id_producto | PK | Identificador único |
-| nombre | string | Nombre del producto |
-| tipo | enum | portón / puerta / ventana / reja / cortina enrollable / cortina roller |
-| material | enum | chapa / madera / aluminio / hierro |
-| a_medida | boolean | Si admite fabricación a medida |
-| descripción | text | Características y especificaciones |
-| precio | decimal | Precio de venta |
-| stock_actual | int | Cantidad disponible |
+---
 
-### Pedido
-| Campo | Tipo | Descripción |
-| ----- | ---- | ----------- |
-| id_pedido | PK | Identificador único |
-| id_cliente | FK → Cliente | Cliente que realiza el pedido |
-| fecha | datetime | Fecha del pedido |
-| estado | enum | pendiente de pago / pagado / rechazado / entregado |
-| total | decimal | Monto total |
+## Decisiones de diseño
 
-### DetallePedido
-| Campo | Tipo | Descripción |
-| ----- | ---- | ----------- |
-| id_detalle | PK | Identificador único |
-| id_pedido | FK → Pedido | Pedido al que pertenece |
-| id_producto | FK → Producto | Producto solicitado |
-| cantidad | int | Cantidad pedida |
-| precio_unitario | decimal | Precio al momento de la compra |
-| medida_a_medida | string | Medidas si el producto es a medida (opcional) |
+### Decisión 1 — Modelado de la entidad `SolicitudCotizacion` independiente de `Producto`
+* **Planteo:** Se evaluó incluir las aberturas a medida dentro de la tabla `Producto` marcándolas con una bandera booleana.
+* **Decisión:** Se creó la entidad explícita `SolicitudCotizacion` separada de `Producto`.
+* **Justificación:** Las aberturas a medida no poseen stock inicial ni precio prefijado y requieren atributos específicos (`alto`, `ancho`, `tipo_vidrio`, `url_plano`) y un flujo de estados de revisión previa.
 
-### Pago
-| Campo | Tipo | Descripción |
-| ----- | ---- | ----------- |
-| id_pago | PK | Identificador único |
-| id_pedido | FK → Pedido | Pedido asociado |
-| id_mercadopago | string | Identificador de la transacción en Mercado Pago |
-| monto | decimal | Monto abonado |
-| estado | enum | aprobado / pendiente / rechazado |
+### Decisión 2 — Asociación del servicio de `Instalacion` a nivel de `Pedido` (Cabecera)
+* **Planteo:** Se analizó si la instalación debía asociarse a cada ítem individual en `DetallePedido` o a la cabecera del `Pedido`.
+* **Decisión:** Se modeló la entidad `Instalacion` vinculada directamente a `Pedido` (`||--o|`).
+* **Justificación:** Operativamente, la visita técnica y la colocación se coordinan en un único viaje y fecha para todo el conjunto de aberturas adquiridas en el mismo pedido.
 
-### Instalacion
-| Campo | Tipo | Descripción |
-| ----- | ---- | ----------- |
-| id_instalacion | PK | Identificador único |
-| id_pedido | FK → Pedido | Pedido asociado |
-| tipo | enum | propia / subcontratada |
-| fecha_programada | date | Fecha estimada de instalación |
-| estado | enum | pendiente / realizada |
-
-### Proveedor
-| Campo | Tipo | Descripción |
-| ----- | ---- | ----------- |
-| id_proveedor | PK | Identificador único |
-| razon_social | string | Nombre del proveedor |
-| cuit | string | Datos de facturación |
-| contacto | string | Teléfono / email |
-
-### OrdenCompra
-| Campo | Tipo | Descripción |
-| ----- | ---- | ----------- |
-| id_orden | PK | Identificador único |
-| id_proveedor | FK → Proveedor | Proveedor al que se le realiza la orden |
-| fecha | date | Fecha de emisión |
-| plazo_entrega | date | Fecha estimada de entrega |
-| estado | enum | pendiente / recibida |
-
-### DetalleOrdenCompra
-| Campo | Tipo | Descripción |
-| ----- | ---- | ----------- |
-| id_detalle_orden | PK | Identificador único |
-| id_orden | FK → OrdenCompra | Orden a la que pertenece |
-| id_producto | FK → Producto | Producto solicitado al proveedor |
-| cantidad | int | Cantidad solicitada |
-| precio_unitario | decimal | Costo acordado con el proveedor |
-
-## Relaciones principales
-
-- Un **Usuario** puede ser un **Cliente** (1:1, cuando el rol es "cliente").
-- Un **Cliente** realiza muchos **Pedidos** (1:N).
-- Un **Pedido** tiene muchos **DetallePedido**, y cada detalle referencia un **Producto** (N:M resuelto vía DetallePedido).
-- Un **Pedido** tiene un **Pago** asociado (1:1).
-- Un **Pedido** puede tener una **Instalacion** asociada (1:1, opcional).
-- Un **Proveedor** recibe muchas **OrdenCompra** (1:N).
-- Una **OrdenCompra** tiene muchos **DetalleOrdenCompra**, y cada detalle referencia un **Producto** (N:M resuelto vía DetalleOrdenCompra).
-- Un **Producto** puede aparecer en muchos **DetallePedido** y muchos **DetalleOrdenCompra**.
+### Decisión 3 — Histórico de precios en `DetallePedido`
+* **Planteo:** Se consideró calcular el total del pedido consultando el precio del `Producto`.
+* **Decisión:** Se incluyó el atributo `precio_unitario` en `DetallePedido`.
+* **Justificación:** Garantiza la integridad histórica de la facturación frente a futuros cambios de precios en el catálogo.
