@@ -1,138 +1,111 @@
-@startuml er
-
-title Empty Diagram - Er
-
-hide circle
-skinparam linetype ortho
+@startuml
+title Modelo Entidad-Relación - Aberturas Los Pampas
 
 entity "Usuario" as usuario {
-  * id_usuario : PK
+  * id_usuario : INT <<PK>>
   --
-  nombre
-  email
-  contraseña
-  rol
+  * nombre : VARCHAR(100)
+  * email : VARCHAR(100) <<UNIQUE>>
+  * clave_hash : VARCHAR(255)
+  * tipo_cliente : VARCHAR(20)
+  razon_social : VARCHAR(100)
+  cuit : VARCHAR(15)
+  * id_rol : INT <<FK>>
 }
 
-entity "Cliente" as cliente {
-  * id_cliente : PK
+entity "Rol" as rol {
+  * id_rol : INT <<PK>>
   --
-  id_usuario : FK
-  tipo_cliente
-  razon_social
-  cuit
-  direccion
+  * nombre_rol : VARCHAR(50)
 }
 
 entity "Producto" as producto {
-  * id_producto : PK
+  * id_producto : INT <<PK>>
   --
-  nombre
-  tipo
-  material
-  a_medida
-  descripcion
-  precio
-  stock_actual
+  * nombre : VARCHAR(100)
+  * descripcion : TEXT
+  * precio : DECIMAL(10,2)
+  * stock_actual : INT
+  * stock_minimo : INT
+  * a_medida : BOOLEAN
+  * id_categoria : INT <<FK>>
+  * id_proveedor : INT <<FK>>
 }
 
-entity "Pedido" as pedido {
-  * id_pedido : PK
+entity "Categoria" as categoria {
+  * id_categoria : INT <<PK>>
   --
-  id_cliente : FK
-  fecha
-  estado
-  total
-}
-
-entity "DetallePedido" as detalle_pedido {
-  * id_detalle : PK
-  --
-  id_pedido : FK
-  id_producto : FK
-  cantidad
-  precio_unitario
-  medida_a_medida
-}
-
-entity "Pago" as pago {
-  * id_pago : PK
-  --
-  id_pedido : FK
-  id_mercadopago
-  monto
-  estado
-}
-
-entity "Instalacion" as instalacion {
-  * id_instalacion : PK
-  --
-  id_pedido : FK
-  tipo
-  fecha_programada
-  estado
+  * nombre_categoria : VARCHAR(50)
 }
 
 entity "Proveedor" as proveedor {
-  * id_proveedor : PK
+  * id_proveedor : INT <<PK>>
   --
-  razon_social
-  cuit
-  contacto
+  * razon_social : VARCHAR(100)
+  * telefono : VARCHAR(20)
+  * email : VARCHAR(100)
+}
+
+entity "Pedido" as pedido {
+  * id_pedido : INT <<PK>>
+  --
+  * fecha : DATETIME
+  * estado_pago : VARCHAR(30)
+  * estado_envio : VARCHAR(30)
+  * total : DECIMAL(10,2)
+  * id_usuario : INT <<FK>>
+}
+
+entity "DetallePedido" as detalle_pedido {
+  * id_detalle : INT <<PK>>
+  --
+  * cantidad : INT
+  * precio_unitario : DECIMAL(10,2)
+  medida_especifica : VARCHAR(100)
+  * id_pedido : INT <<FK>>
+  * id_producto : INT <<FK>>
+}
+
+entity "SolicitudCotizacion" as cotizacion {
+  * id_cotizacion : INT <<PK>>
+  --
+  * fecha_solicitud : DATETIME
+  * alto : DECIMAL(5,2)
+  * ancho : DECIMAL(5,2)
+  * material : VARCHAR(50)
+  * tipo_vidrio : VARCHAR(50)
+  url_plano : VARCHAR(255)
+  * estado : VARCHAR(30)
+  precio_cotizado : DECIMAL(10,2)
+  * id_usuario : INT <<FK>>
+}
+
+entity "Instalacion" as instalacion {
+  * id_instalacion : INT <<PK>>
+  --
+  * fecha_programada : DATE
+  * direccion : VARCHAR(200)
+  * estado : VARCHAR(30)
+  * id_pedido : INT <<FK>>
 }
 
 entity "OrdenCompra" as orden_compra {
-  * id_orden : PK
+  * id_orden : INT <<PK>>
   --
-  id_proveedor : FK
-  fecha
-  plazo_entrega
-  estado
+  * fecha_emision : DATETIME
+  * estado : VARCHAR(30)
+  * total : DECIMAL(10,2)
+  * id_proveedor : INT <<FK>>
 }
 
-entity "DetalleOrdenCompra" as detalle_orden {
-  * id_detalle_orden : PK
-  --
-  id_orden : FK
-  id_producto : FK
-  cantidad
-  precio_unitario
-}
-
-usuario ||--o| cliente : "es (rol cliente)"
-cliente ||--o{ pedido : realiza
-pedido ||--|{ detalle_pedido : contiene
-producto ||--o{ detalle_pedido : incluido_en
-pedido ||--o| pago : tiene
-pedido ||--o| instalacion : tiene
-
-proveedor ||--o{ orden_compra : recibe
-orden_compra ||--|{ detalle_orden : contiene
-producto ||--o{ detalle_orden : solicitado_en
-
-@endumlK>>
-  --
-  atributo1 : varchar
-  atributo2 : varchar
-}
-
-entity Entidad2 {
-  * id_entidad2 : integer <<PK>>
-  --
-  atributo1 : varchar
-  id_entidad1 : integer <<FK>>
-}
-
-entity Entidad3 {
-  * id_entidad3 : integer <<PK>>
-  --
-  atributo1 : varchar
-  id_entidad1 : integer <<FK>>
-}
-
-' --- Relaciones ---
-' Sintaxis: EntidadA [cardinalidad] -- [cardinalidad] EntidadB : "etiqueta"
-Entidad1 ||--o{ Entidad2 : "relación"
-Entidad1 ||--o{ Entidad3 : "relación"
+usuario }|--|| rol
+usuario ||--o{ pedido
+usuario ||--o{ cotizacion
+producto }|--|| categoria
+producto }|--|| proveedor
+pedido ||--|{ detalle_pedido
+producto ||--o{ detalle_pedido
+pedido ||--o| instalacion
+proveedor ||--o{ orden_compra
 
 @enduml
