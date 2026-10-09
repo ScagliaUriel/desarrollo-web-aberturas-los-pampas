@@ -5,7 +5,7 @@ skinparam packageStyle rectangle
 
 actor "Cliente" as usr
 actor "Cliente Registrado" as usrAuth
-actor "Gestor de Ventas" as admin
+actor "Personal de Ventas" as admin
 actor "Operador de Depósito" as op
 actor "Mercado Pago" as mp
 
@@ -33,7 +33,6 @@ usrAuth --> CU04
 usrAuth --> CU05
 usrAuth --> CU07
 
-CU02 ..> CU01 : <<extend>>
 CU05 ..> CU06 : <<include>>
 CU06 --> mp
 
