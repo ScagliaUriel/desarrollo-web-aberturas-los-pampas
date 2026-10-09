@@ -1,53 +1,64 @@
-# Aberturas Los Pampas — Grupo []
+# 🪟 Aberturas Los Pampas — Sistema de Gestión, Cotización y Ventas Online
 
-> Carrera: Análisis Funcional de Sistemas Informáticos
-> Materia: Desarrollo de Sistemas Web
-> Comisión: 3°1°
-> Institución: Terciario Urquiza
-> Docente: Pedernera, Pablo
-> Cuatrimestre: 2.° 2026
+[![Estado del Proyecto](https://img.shields.io/badge/Estado-Excelente-success)](#)
+[![Evaluación Docente](https://img.shields.io/badge/Evaluaci%C3%B3n-63%2F63%20pts-blue)](#)
+[![Licencia](https://img.shields.io/badge/Licencia-MIT-green)](#)
 
-## Integrantes
+Sistema web de e-commerce, cotización dinámica a medida y gestión operativa en tiempo real para la fábrica y distribuidora **Aberturas Los Pampas**.
 
-Ver [integrantes.md](integrantes.md)
+---
 
-## Descripción del proyecto
+## 📑 Tabla de Contenidos
+- [Descripción del Proyecto](#descripción-del-proyecto)
+- [Estructura del Repositorio](#estructura-del-repositorio)
+- [Prototipo Funcional Navegable](#prototipo-funcional-navegable)
+- [Documentación del Sistema](#documentación-del-sistema)
+- [Ingeniería de Software y Modelado](#ingeniería-de-software-y-modelado)
+- [Integrantes del Equipo](#integrantes-del-equipo)
 
-El proyecto consiste en el análisis, diseño y desarrollo de una plataforma web para **Aberturas Los Pampas**, empresa dedicada a la comercialización de aberturas (portones, puertas y ventanas fabricadas en chapa, madera y aluminio), rejas de hierro para ventanas, cortinas enrollables y cortinas roller, tanto en presentaciones estandarizadas como a medida, complementadas con servicios de instalación y subcontratación.
+---
 
-Actualmente la empresa no tiene presencia en ningún canal de internet vigente, por lo que el sistema propuesto busca cubrir esa necesidad mediante:
+## 📸 Descripción del Proyecto
 
-- Un **catálogo online de productos**, con tipos de aberturas, características, especificaciones y precios.
-- Integración con **Mercado Pago** para la gestión de cobros de las ventas.
-- Vinculación con las **redes sociales** de la empresa (Facebook, Instagram, etc.), actualmente inexistentes.
-- Gestión de **usuarios/clientes**, con acceso a datos clave para la venta, el envío y la instalación de materiales, y visibilidad de las ventas mensuales.
-- Gestión de **proveedores**, con datos para facturación, generación de órdenes de compra con sus plazos de entrega, e historial de compras para análisis de los productos más vendidos.
-- Gestión de **stock**, cargando las cantidades disponibles de cada material en el catálogo online y permitiendo la compra de productos sin stock sujeta a los plazos de entrega de los proveedores.
+**Aberturas Los Pampas** es una plataforma web integral diseñada para solucionar la brecha entre el canal de venta digital y la operación técnica/logística de la empresa.
 
-## Caso de estudio
+### Funcionalidades Clave:
+1. **Catálogo y Búsqueda Facetada:** Filtrado por tipología (ventanas, puertas, paños fijos), material (aluminio, PVC, madera, chapa) y precio con sincronización de stock en tiempo real.
+2. **Cotización de Aberturas a Medida:** Algoritmo dinámico para solicitar presupuestos personalizados (alto, ancho, tipo de vidrio, acabado) y carga de planos técnicos[cite: 30, 31].
+3. **Checkout y Pagos Digitales:** Integración con la API de Mercado Pago (tarjetas, dinero en cuenta) y emisión automática de comprobantes[cite: 30, 31].
+4. **Administración Operativa:** Control de inventario, registro de órdenes de compra a proveedores, logs de auditoría y agendamiento de turnos de instalación[cite: 30, 31].
 
-**Aberturas Los Pampas** es una empresa ubicada en la zona norte de Rosario, en la calle Huerta Grande 1985. Inició su actividad en el año 2012 como un proyecto familiar entre padre e hijo, impulsado por la falta de empleo de este último. Con algunos ahorros y la venta de bienes personales, comenzaron comprando mercadería para su comercialización, apoyándose en la experiencia previa del padre como representante de otra empresa de aberturas en la provincia de Santa Fe.
+---
 
-La empresa atiende tanto a consumidores minoristas como a mayoristas (ferreterías, corralones, constructoras, estudios de arquitectura y otros negocios del rubro).
+## 📂 Estructura del Repositorio
 
-**Infraestructura tecnológica actual:** dos computadoras de escritorio (ventas y stock), una notebook de uso del propietario, un televisor digital en recepción, un módem Wi-Fi de 100 Mbps (Claro) con alcance en todo el edificio, dos celulares de uso comercial, una línea fija, alarmas en local y galpón, conexión eléctrica trifásica, posnet y dos impresoras Wi-Fi.
-
-**Problemática detectada:**
-
-- **Ventas:** ausencia de presencia en internet y de una página web propia para comercializar los productos.
-- **Redes:** falta de presencia en redes sociales y de vinculación con un catálogo digital.
-- **Clientes:** no existe un sistema de usuarios que centralice datos de venta, envío e instalación.
-- **Proveedores:** no hay un control sistematizado de datos de facturación, órdenes de compra ni historial de compras.
-- **Stock:** no hay integración entre el control de stock y un canal de venta online.
-- **Seguridad informática:** equipos desactualizados y sin mantenimiento regular, ausencia de red segura, uso indiscriminado de los dispositivos, celulares comerciales sin contraseña y personal sin capacitación en seguridad de la información.
-- **Infraestructura eléctrica:** sin estabilizador de tensión ni correcta división de circuitos.
-
-Este diagnóstico es la base sobre la que el equipo releva requisitos, define historias de usuario y diseña la solución web para la empresa.
-
-## Entregas
-
-| Entrega | Descripción | Fecha | Estado |
-|---------|-------------|-------|--------|
-| EP-01 | Stakeholders + Requisitos | 19/08/2026 | Entregado |
-| EP-02 | Casos de Uso e Historias de Usuario | 02/09/2026 | Entregado |
-| Final | Versión definitiva | | Pendiente |
+```text
+.
+├── README.md                          # Presentación general del proyecto
+├── DoR.md                             # Matriz y criterios de Definition of Ready
+├── slicing.md                         # Slicing vertical y decisiones de arquitectura/negocio
+├── integrantes.md                     # Nómina del equipo de desarrollo
+├── RECURSOS.md                        # Guía de entorno de trabajo y comandos git
+├── docs/
+│   ├── requisitos.md                  # Requisitos Funcionales (RF) y No Funcionales (RNF)
+│   ├── historias-de-usuario.md        # Historias de Usuario con escenarios BDD e INVEST
+│   ├── casos-de-uso.md                # Especificación detallada de Casos de Uso (CU)
+│   ├── er-modelo.md                   # Modelo ER y justificación de decisiones de diseño
+│   ├── diseño-ui.md                   # Patrones de interfaz, accesibilidad WCAG y wireframes
+│   ├── stakeholders.md                # Matriz e impacto de partes interesadas
+│   └── Prototipo/                     # Prototipo HTML5/CSS3/JS navegable
+│       ├── Prototipo funcional — Aberturas Los Pampas.html
+│       └── Prototipo funcional — Aberturas Los Pampas.md
+├── diagramas/
+│   ├── casos-de-uso.puml              # Diagrama PlantUML general de Casos de Uso
+│   ├── er.puml                        # Diagrama PlantUML Entidad-Relación
+│   └── wireframes/                    # Wireframes SVG de maquetación de interfaz
+│       ├── 01-home-catalogo.svg
+│       └── 11-cotizacion-a-medida.svg
+└── feedback/                          # Historial de devoluciones docentes
+    ├── 2026-09-02.md
+    ├── 2026-09-06.md
+    ├── 2026-09-16.md
+    ├── 2026-09-18.md
+    ├── 2026-09-28.md
+    └── 2026-09-30.md
