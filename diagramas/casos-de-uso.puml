@@ -1,4 +1,5 @@
 @startuml AberturasLosPampas_CasosDeUso
+title Casos de Uso — Aberturas Los Pampas
 left to right direction
 skinparam packageStyle rectangle
 
@@ -11,26 +12,40 @@ actor "Mercado Pago" as mp
 usrAuth --|> usr
 
 rectangle "Sistema Aberturas Los Pampas" {
-  usecase "CU-01: Consultar Catálogo" as CU01
-  usecase "CU-02: Solicitar Cotización a Medida" as CU02
-  usecase "CU-04: Realizar Checkout" as CU04
-  usecase "CU-05: Procesar Pago Digital" as CU05
-  usecase "CU-08: Coordinar Instalación" as CU08
-  usecase "CU-10: Generar Orden de Compra" as CU10
-  usecase "CU-12: Consultar Log de Auditoría" as CU12
+  usecase "CU-01: Consultar Catálogo\n(wf 01, 02)" as CU01
+  usecase "CU-02: Solicitar Cotización a Medida\n(wf 11)" as CU02
+  usecase "CU-03: Iniciar Sesión / Registrarse\n(wf 01 'Ingresar', 06)" as CU03
+  usecase "CU-04: Gestionar Carrito\n(wf 03)" as CU04
+  usecase "CU-05: Realizar Checkout\n(wf 04)" as CU05
+  usecase "CU-06: Procesar Pago Digital\n(wf 04)" as CU06
+  usecase "CU-07: Consultar Mis Pedidos y Cotizaciones\n(wf 05)" as CU07
+  usecase "CU-08: Gestionar Productos y Stock\n(wf 07)" as CU08
+  usecase "CU-09: Controlar Pedidos y Despachos\n(wf 09)" as CU09
+  usecase "CU-10: Coordinar Instalación\n(wf 09)" as CU10
+  usecase "CU-11: Generar Orden de Compra\n(wf 08)" as CU11
+  usecase "CU-12: Ver Dashboard de Ventas\n(wf 10)" as CU12
 }
 
 usr --> CU01
-usr --> CU02
+usr --> CU03
+usrAuth --> CU02
 usrAuth --> CU04
 usrAuth --> CU05
-CU05 ..> mp : <<integra>>
-CU02 <.. CU01 : <<extend>>
-CU05 ..> CU04 : <<include>>
+usrAuth --> CU07
 
+CU02 ..> CU01 : <<extend>>
+CU05 ..> CU06 : <<include>>
+CU06 --> mp
+
+admin --> CU03
 admin --> CU02
-admin --> CU10
-op --> CU08
-op --> CU10
+admin --> CU11
 admin --> CU12
+op --> CU03
+op --> CU08
+op --> CU09
+op --> CU10
+op --> CU11
+
+CU10 ..> CU09 : <<extend>>
 @enduml
