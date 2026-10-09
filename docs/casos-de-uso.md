@@ -1,140 +1,460 @@
 # Casos de uso
 
-## Diagrama general
+El código PlantUML del diagrama general está en [`diagramas/casos-de-uso.puml`](../diagramas/casos-de-uso.puml). Cada caso de uso se corresponde con una pantalla de los wireframes de [`diagramas/wireframes`](../diagramas/wireframes).
 
-El código PlantUML del diagrama general se encuentra guardado en `diagramas/casos-de-uso.puml`[cite: 31].
+## Actores
 
-### Actores identificados
-- **Cliente:** Actor principal externo. Navega el catálogo, realiza compras online y solicita presupuestos de aberturas a medida[cite: 31].
-- **Cliente Registrado:** Actor principal autenticado. Realiza el checkout y efectúa el pago mediante la pasarela digital[cite: 30, 31].
-- **Gestor de Ventas:** Actor interno. Revisa y gestiona solicitudes de cotización a medida y atiende reclamos comerciales[cite: 30, 31].
-- **Operador de Depósito:** Actor interno. Controla el inventario, emite Órdenes de Compra y coordina las fechas de instalación técnica[cite: 30, 31].
-- **Mercado Pago:** Pasarela de pago externa. Procesa los cobros con tarjeta o saldo virtual[cite: 30, 31].
+- **Cliente:** visitante sin sesión. Consulta el catálogo e inicia sesión o se registra.
+- **Cliente Registrado:** hereda del Cliente. Cotiza a medida, arma el carrito, paga y consulta sus pedidos.
+- **Gestor de Ventas:** personal interno. Revisa cotizaciones, emite órdenes de compra y consulta el dashboard.
+- **Operador de Depósito:** personal interno. Administra productos y stock, controla despachos y coordina instalaciones.
+- **Mercado Pago:** sistema externo. Procesa y valida los cobros.
 
-### Justificación de Relaciones UML Especificadas
-- **`CU-03 (Solicitar Cotización a Medida) <<extend>> CU-02 (Consultar Catálogo)`:** La relación de extensión se justifica ya que la solicitud a medida es un flujo opcional que el cliente activa únicamente si las aberturas estándar ofrecidas en el catálogo no satisfacen sus requerimientos de dimensiones o acabados[cite: 30, 31].
-- **`CU-05 (Procesar Pago Digital) <<include>> CU-04 (Realizar Checkout)`:** La inclusión es obligatoria dado que no es posible finalizar la confirmación de la orden de compra en el e-commerce sin invocar y aprobar el cobro electrónico mediante la pasarela[cite: 30, 31].
+## Trazabilidad con los wireframes
+
+| Caso de uso | Wireframe | Actores |
+|---|---|---|
+| CU-01 — Consultar Catálogo | wf 01, 02 | Cliente / Cliente Registrado |
+| CU-02 — Solicitar Cotización a Medida | wf 11 | Principal: Cliente Registrado / Secundario: Gestor de Ventas |
+| CU-03 — Iniciar Sesión / Registrarse | wf 01 "Ingresar", wf 06 | Cliente / Gestor de Ventas / Operador de Depósito |
+| CU-04 — Gestionar Carrito | wf 03 | Cliente Registrado |
+| CU-05 — Realizar Checkout | wf 04 | Principal: Cliente Registrado |
+| CU-06 — Procesar Pago Digital | wf 04 | Principal: Cliente Registrado / Secundario: Mercado Pago |
+| CU-07 — Consultar Mis Pedidos y Cotizaciones | wf 05 | Cliente Registrado |
+| CU-08 — Gestionar Productos y Stock | wf 07 | Operador de Depósito |
+| CU-09 — Controlar Pedidos y Despachos | wf 09 | Operador de Depósito |
+| CU-10 — Coordinar Instalación | wf 09 | Operador de Depósito |
+| CU-11 — Generar Orden de Compra | wf 08 | Gestor de Ventas / Operador de Depósito |
+| CU-12 — Ver Dashboard de Ventas | wf 10 | Gestor de Ventas |
 
 ---
 
-## CU-04 — Realizar Compra Online (Checkout)
+## CU-01 — Consultar Catálogo
 
 | Campo | Detalle |
-|-------|---------|
+|---|---|
+| Identificador | CU-01 |
+| Nombre | Consultar Catálogo |
+| Pantalla | wf 01, 02 |
+| Descripción | El cliente navega los productos destacados y el detalle de cada abertura (especificaciones, precio y disponibilidad). |
+| Actores | Cliente / Cliente Registrado |
+| Precondiciones | Ninguna (acceso público). |
+| Postcondiciones | Se exhibe el producto con su precio y estado de stock. |
+
+### Secuencia normal
+
+| # | Acción (actor) | Reacción (sistema) |
+|---|---|---|
+| 1 | El cliente ingresa al sitio o a "Catálogo". | El sistema muestra los productos destacados con imagen, nombre, descripción y precio. |
+| 2 | El cliente selecciona un producto. | El sistema muestra la ficha con especificaciones técnicas, precio e indicador "Stock Disponible". |
+| 3 | El cliente presiona "Añadir al Carrito" o "Solicitar a Medida". | El sistema ejecuta CU-04 (agrega el producto) o redirige a CU-02 (extend). |
+
+### Excepciones
+
+| # | Situación | Respuesta del sistema |
+|---|---|---|
+| E1 | Producto sin stock | El sistema muestra "Sin stock" y el plazo de entrega estimado; deshabilita "Añadir al Carrito" y deja disponible "Solicitar a Medida". |
+
+| Campo | Detalle |
+|---|---|
+| Rendimiento | < 3 segundos en la carga del catálogo. |
+| Frecuencia | Alta |
+| Importancia | Alta |
+| Urgencia | Alta |
+
+---
+
+## CU-02 — Solicitar Cotización a Medida
+
+| Campo | Detalle |
+|---|---|
+| Identificador | CU-02 |
+| Nombre | Solicitar Cotización a Medida |
+| Pantalla | wf 11 |
+| Descripción | El cliente configura una abertura fuera de catálogo (tipología, dimensiones, vidrio, color y observaciones), obtiene una estimación y la envía a revisión técnica. |
+| Actores | Principal: Cliente Registrado / Secundario: Gestor de Ventas |
+| Precondiciones | El cliente está autenticado (CU-03). Se invoca como extensión de CU-01 desde "Solicitar a Medida" o "Cotizar a Medida". |
+| Postcondiciones | Éxito: se registra la solicitud en estado "En Revisión" y queda visible en Mis Pedidos (CU-07). Fallo: no se registra. |
+
+### Secuencia normal
+
+| # | Acción (actor) | Reacción (sistema) |
+|---|---|---|
+| 1 | El cliente selecciona la tipología e ingresa ancho y alto en mm. | El sistema valida que las dimensiones estén dentro del rango de fabricación. |
+| 2 | El cliente elige tipo de vidrio, color/acabado y completa observaciones. | El sistema guarda la configuración. |
+| 3 | El cliente presiona "Calcular Estimación". | El sistema muestra el resumen: materiales, mano de obra, vidrio y total estimado. |
+| 4 | El cliente presiona "Enviar a Revisión Técnica". | El sistema registra la solicitud N° COT-X en estado "En Revisión" y notifica al Gestor de Ventas. |
+| 5 | El Gestor de Ventas revisa la solicitud. | El sistema actualiza su estado y notifica al cliente. |
+
+### Excepciones
+
+| # | Situación | Respuesta del sistema |
+|---|---|---|
+| E1 | Dimensiones fuera de rango (menor a 500 mm o mayor a 3000 mm) | El sistema muestra "Las dimensiones están fuera del rango estándar de fabricación" y no calcula la estimación. |
+| E2 | Cliente sin sesión iniciada | Al presionar "Enviar a Revisión Técnica" el sistema deriva a CU-03 y, al ingresar, retoma la cotización. |
+
+| Campo | Detalle |
+|---|---|
+| Rendimiento | Cálculo de estimación < 2 segundos. |
+| Frecuencia | Media |
+| Importancia | Alta |
+| Urgencia | Alta |
+
+---
+
+## CU-03 — Iniciar Sesión / Registrarse
+
+| Campo | Detalle |
+|---|---|
+| Identificador | CU-03 |
+| Nombre | Iniciar Sesión / Registrarse |
+| Pantalla | wf 01 "Ingresar", wf 06 |
+| Descripción | Autenticación de clientes y del personal interno, y alta de cuenta para clientes nuevos. |
+| Actores | Cliente / Gestor de Ventas / Operador de Depósito |
+| Precondiciones | El usuario no tiene sesión activa. |
+| Postcondiciones | Éxito: sesión iniciada con los permisos de su rol. Fallo: acceso denegado. |
+
+### Secuencia normal
+
+| # | Acción (actor) | Reacción (sistema) |
+|---|---|---|
+| 1 | El usuario ingresa correo y contraseña. | El sistema valida las credenciales. |
+| 2 | El sistema identifica el rol asignado al usuario. | El sistema redirige al sitio (cliente) o al panel interno (personal). |
+
+### Excepciones
+
+| # | Situación | Respuesta del sistema |
+|---|---|---|
+| E1 | Credenciales inválidas | El sistema informa "Usuario o contraseña incorrectos". |
+| E2 | Correo ya registrado (alta de cliente) | El sistema informa "El e-mail ya se encuentra registrado" y no crea la cuenta. |
+| E3 | Sesión del panel inactiva 15 minutos | El sistema cierra la sesión del personal interno. |
+
+| Campo | Detalle |
+|---|---|
+| Rendimiento | Respuesta < 2 segundos. |
+| Frecuencia | Alta |
+| Importancia | Alta |
+| Urgencia | Alta |
+
+---
+
+## CU-04 — Gestionar Carrito
+
+| Campo | Detalle |
+|---|---|
 | Identificador | CU-04 |
-| Nombre | Realizar Compra Online |
-| Descripción | El cliente selecciona productos del carrito, confirma la dirección de envío y procede a la instancia de pago[cite: 31]. |
-| Actores | Principal: Cliente Registrado / Secundario: Mercado Pago[cite: 30, 31] |
-| Precondiciones | El cliente debe autenticarse y disponer de al menos un producto en el carrito de compras[cite: 31]. |
-| Postcondiciones | Éxito: Se genera la orden de compra en estado "Pagada" y se descuenta el stock[cite: 31]. / Fallo: La orden no se procesa o queda "Pendiente de pago", manteniendo el stock intacto[cite: 31]. |
+| Nombre | Gestionar Carrito |
+| Pantalla | wf 03 |
+| Descripción | El cliente revisa los productos agregados, ajusta cantidades y decide si solicita instalación. |
+| Actores | Cliente Registrado |
+| Precondiciones | El cliente tiene al menos un producto en el carrito. |
+| Postcondiciones | El carrito refleja cantidades, instalación y total actualizados. |
 
 ### Secuencia normal
 
 | # | Acción (actor) | Reacción (sistema) |
-|---|----------------|--------------------|
-| 1 | El cliente presiona "Iniciar Checkout" desde el carrito de compras[cite: 31]. | El sistema solicita confirmación del domicilio de entrega y método de envío[cite: 31]. |
-| 2 | El cliente selecciona la dirección y presiona "Ir a pagar"[cite: 31]. | El sistema invoca al caso de uso CU-05 (Procesar Pago Digital) redireccionando a la pasarela[cite: 31]. |
-| 3 | El cliente completa los datos de pago y confirma la transacción[cite: 31]. | El sistema recibe la notificación de cobro approved (Webhook), marca la orden como "Pagada" y descuenta las unidades del inventario[cite: 31]. |
-| 4 | El cliente visualiza la pantalla de confirmación[cite: 31]. | El sistema envía la factura digital por correo electrónico[cite: 31]. |
+|---|---|---|
+| 1 | El cliente abre "Mi Carrito de Compras". | El sistema lista los productos con cantidad, precio unitario y subtotal. |
+| 2 | El cliente modifica la cantidad con − / +. | El sistema recalcula el subtotal y el total. |
+| 3 | El cliente tilda "Solicitar servicio de colocación e instalación". | El sistema suma el servicio de instalación al resumen. |
+| 4 | El cliente presiona "Proceder al Checkout". | El sistema ejecuta CU-05. |
 
 ### Excepciones
 
 | # | Situación | Respuesta del sistema |
-|---|-----------|-----------------------|
-| E1 | Falta de stock al momento de confirmar | Si otro usuario compró la última unidad durante el proceso, el sistema bloquea el checkout, muestra *"Producto sin stock disponible"* y devuelve al usuario al carrito[cite: 31]. |
-| E2 | Rechazo o fallo de pago en Mercado Pago | El sistema recibe la notificación de cobro denegado, mantiene la orden en estado "Pendiente de pago" y ofrece al cliente reintentar con otro medio de cobro[cite: 31]. |
+|---|---|---|
+| E1 | Cantidad mayor al stock | El sistema informa "Solo quedan X unidades disponibles" y mantiene la cantidad máxima. |
+| E2 | Carrito vacío | El sistema muestra "Tu carrito está vacío" y oculta el botón de checkout. |
 
 | Campo | Detalle |
-|-------|---------|
-| Rendimiento | Tiempo de carga de pantalla < 2 segundos. Respuesta de la pasarela < 5 segundos[cite: 31]. |
-| Frecuencia | Alta (múltiples transacciones diarias)[cite: 31]. |
-| Importancia | Alta (flujo principal de ingresos e-commerce)[cite: 31]. |
-| Urgencia | Alta[cite: 31] |
+|---|---|
+| Rendimiento | Recálculo inmediato. |
+| Frecuencia | Alta |
+| Importancia | Alta |
+| Urgencia | Alta |
 
 ---
 
-## CU-05 — Procesar Pago Digital
+## CU-05 — Realizar Checkout
 
 | Campo | Detalle |
-|-------|---------|
+|---|---|
 | Identificador | CU-05 |
+| Nombre | Realizar Checkout |
+| Pantalla | wf 04 |
+| Descripción | El cliente confirma datos de facturación, dirección de entrega o instalación y método de pago. |
+| Actores | Principal: Cliente Registrado |
+| Precondiciones | El cliente está autenticado y tiene productos en el carrito. |
+| Postcondiciones | Éxito: pedido generado y pago procesado (CU-06). Fallo: pedido "Pendiente de pago" con stock intacto. |
+
+### Secuencia normal
+
+| # | Acción (actor) | Reacción (sistema) |
+|---|---|---|
+| 1 | El cliente revisa datos personales y de facturación. | El sistema muestra los datos del cliente precargados. |
+| 2 | El cliente confirma la dirección de entrega o instalación. | El sistema valida la dirección. |
+| 3 | El cliente elige el método de pago y presiona "Pagar con Mercado Pago". | El sistema ejecuta CU-06 (include). |
+| 4 | El cliente visualiza el resultado. | El sistema muestra la confirmación y envía el comprobante por e-mail. |
+
+### Excepciones
+
+| # | Situación | Respuesta del sistema |
+|---|---|---|
+| E1 | Falta de stock al confirmar | El sistema bloquea el checkout, informa "Producto sin stock disponible" y devuelve al carrito. |
+| E2 | Pago rechazado | El pedido queda "Pendiente de pago" y se ofrece reintentar. |
+
+| Campo | Detalle |
+|---|---|
+| Rendimiento | Carga de pantalla < 2 segundos. |
+| Frecuencia | Alta |
+| Importancia | Alta |
+| Urgencia | Alta |
+
+---
+
+## CU-06 — Procesar Pago Digital
+
+| Campo | Detalle |
+|---|---|
+| Identificador | CU-06 |
 | Nombre | Procesar Pago Digital |
-| Descripción | Integra la API de Mercado Pago para efectuar el cobro con tarjeta o dinero en cuenta de manera segura[cite: 31]. |
-| Actores | Principal: Cliente Registrado / Secundario: Mercado Pago[cite: 30, 31] |
-| Precondiciones | Existencia de una orden de compra generada en estado "Pendiente"[cite: 31]. |
-| Postcondiciones | Éxito: La transacción se valida y retorna token de pago aprobado[cite: 31]. / Fallo: Se registra el motivo del rechazo[cite: 31]. |
+| Pantalla | wf 04 |
+| Descripción | El sistema delega el cobro en Mercado Pago (tarjetas, débito o dinero en cuenta). |
+| Actores | Principal: Cliente Registrado / Secundario: Mercado Pago |
+| Precondiciones | Existe un pedido generado en estado "Pendiente de pago". |
+| Postcondiciones | Éxito: pago aprobado y stock descontado. Fallo: se registra el motivo del rechazo. |
 
 ### Secuencia normal
 
 | # | Acción (actor) | Reacción (sistema) |
-|---|----------------|--------------------|
-| 1 | El cliente ingresa los datos de su tarjeta o selecciona saldo disponible en Mercado Pago[cite: 31]. | La pasarela procesa los datos cifrados mediante protocolo seguro[cite: 31]. |
-| 2 | La pasarela emite la respuesta de operación autorizada[cite: 31]. | El sistema recibe el webhook de confirmación e impacta el pago en la base de datos[cite: 31]. |
+|---|---|---|
+| 1 | El cliente ingresa los datos de pago en la pasarela. | Mercado Pago procesa los datos cifrados. |
+| 2 | Mercado Pago informa el resultado. | El sistema recibe el webhook, marca el pedido "Pagado" y descuenta el stock. |
 
 ### Excepciones
 
 | # | Situación | Respuesta del sistema |
-|---|-----------|-----------------------|
-| E1 | Fondos insuficientes o tarjeta rechazada | La pasarela retorna un código de error. El sistema muestra *"Pago rechazado por la entidad emisora"* sin cancelar el pedido[cite: 31]. |
-| E2 | Caída o timeout del servicio externo | Si Mercado Pago no responde en 10 segundos, el sistema muestra *"Servicio de pago no disponible temporalmente"* y guarda el intento para posterior reintento[cite: 31]. |
+|---|---|---|
+| E1 | Fondos insuficientes o tarjeta rechazada | El sistema muestra "Pago rechazado por la entidad emisora" sin cancelar el pedido. |
+| E2 | Timeout de Mercado Pago (10 s) | El sistema muestra "Servicio de pago no disponible temporalmente" y guarda el intento para reintento. |
 
 | Campo | Detalle |
-|-------|---------|
-| Rendimiento | Respuesta de integración por API < 3 segundos[cite: 31]. |
-| Frecuencia | Alta[cite: 31] |
-| Importancia | Alta[cite: 31] |
-| Urgencia | Alta[cite: 31] |
+|---|---|
+| Rendimiento | Respuesta de integración < 3 segundos. |
+| Frecuencia | Alta |
+| Importancia | Alta |
+| Urgencia | Alta |
 
 ---
 
-## CU-08 — Agendar e Instalación Técnica
+## CU-07 — Consultar Mis Pedidos y Cotizaciones
 
 | Campo | Detalle |
-|-------|---------|
+|---|---|
+| Identificador | CU-07 |
+| Nombre | Consultar Mis Pedidos y Cotizaciones |
+| Pantalla | wf 05 |
+| Descripción | El cliente consulta su historial de pedidos y solicitudes de cotización con estado de pago y logística. |
+| Actores | Cliente Registrado |
+| Precondiciones | El cliente está autenticado. |
+| Postcondiciones | Se muestra el historial con el estado actual de cada pedido y cotización. |
+
+### Secuencia normal
+
+| # | Acción (actor) | Reacción (sistema) |
+|---|---|---|
+| 1 | El cliente ingresa a "Mis Pedidos". | El sistema muestra sus datos y el historial (N° de pedido, fecha, estado de pago, logística y total). |
+| 2 | El cliente revisa una cotización. | El sistema muestra su estado ("En Revisión") y el total como "Pendiente" hasta que Ventas la cotiza. |
+
+### Excepciones
+
+| # | Situación | Respuesta del sistema |
+|---|---|---|
+| E1 | Cliente sin pedidos | El sistema informa "Todavía no realizaste pedidos". |
+
+| Campo | Detalle |
+|---|---|
+| Rendimiento | < 2 segundos. |
+| Frecuencia | Media |
+| Importancia | Media |
+| Urgencia | Media |
+
+---
+
+## CU-08 — Gestionar Productos y Stock
+
+| Campo | Detalle |
+|---|---|
 | Identificador | CU-08 |
-| Nombre | Agendar e Instalación Técnica |
-| Descripción | Permite coordinar la visita técnica en el domicilio del cliente para la colocación de aberturas[cite: 31]. |
-| Actores | Principal: Cliente Registrado / Secundario: Operador de Depósito[cite: 30, 31] |
-| Precondiciones | El pedido debe estar en estado "Pagado" y contener la solicitud de colocación[cite: 31]. |
-| Postcondiciones | Éxito: Se genera la orden de instalación en estado "Agendada"[cite: 31]. |
+| Nombre | Gestionar Productos y Stock |
+| Pantalla | wf 07 |
+| Descripción | ABM de productos y control del stock, con alerta visual de stock mínimo. |
+| Actores | Operador de Depósito |
+| Precondiciones | Usuario del personal autenticado con rol habilitado. |
+| Postcondiciones | El catálogo y el stock quedan actualizados. |
 
 ### Secuencia normal
 
 | # | Acción (actor) | Reacción (sistema) |
-|---|----------------|--------------------|
-| 1 | El cliente solicita el servicio adicional de colocación al momento de la compra[cite: 31]. | El sistema marca el flag de instalación en la orden de compra[cite: 31]. |
-| 2 | El Operador de Depósito revisa los turnos disponibles en la agenda y asigna la fecha técnica[cite: 30, 31]. | El sistema envía una notificación confirmando la fecha y datos del instalador[cite: 31]. |
-
----
-
-## CU-10 — Emitir Orden de Compra a Proveedor
-
-| Campo | Detalle |
-|-------|---------|
-| Identificador | CU-10 |
-| Nombre | Emitir Orden de Compra a Proveedor |
-| Descripción | Permite generar una solicitud de reposición de mercadería hacia los fabricantes de aberturas[cite: 31]. |
-| Actores | Principal: Operador de Depósito / Gestor de Ventas[cite: 30, 31] |
-| Precondiciones | El proveedor debe estar dado de alta y activo en la base de datos[cite: 31]. |
-| Postcondiciones | Éxito: Se genera el documento de Orden de Compra en estado "Pendiente de entrega" y se envía al proveedor[cite: 30, 31]. / Fallo: La orden no se emite[cite: 31]. |
-
-### Secuencia normal
-
-| # | Acción (actor) | Reacción (sistema) |
-|---|----------------|--------------------|
-| 1 | El usuario selecciona un proveedor del listado y presiona "Nueva Orden de Compra"[cite: 31]. | El sistema despliega el formulario con los productos asociados a dicho proveedor[cite: 31]. |
-| 2 | El usuario especifica las cantidades de aberturas a solicitar y confirma[cite: 31]. | El sistema registra la orden de compra en estado "Pendiente de entrega" y genera el comprobante[cite: 30, 31]. |
+|---|---|---|
+| 1 | El operador ingresa a "Gestión de Inventario y Stock". | El sistema lista ID, producto, categoría, precio base, stock actual y estado. |
+| 2 | El operador busca por nombre o ID, o filtra por línea. | El sistema recalcula el listado. |
+| 3 | El operador presiona "+ Nuevo Producto" o edita uno existente. | El sistema muestra el formulario del producto. |
+| 4 | El operador guarda los cambios. | El sistema valida, persiste y registra el movimiento de stock. |
 
 ### Excepciones
 
 | # | Situación | Respuesta del sistema |
-|---|-----------|-----------------------|
-| E1 | Producto discontinuado por proveedor | Si se intenta solicitar un producto dado de baja, el sistema notifica *"El artículo X ya no es suministrado por este proveedor"* e impide su inclusión[cite: 31]. |
-| E2 | Proveedor inactivo o suspendido | Si la empresa proveedora se halla suspendida comercialmente, el sistema bloquea el formulario e indica *"El proveedor no se encuentra habilitado para recibir pedidos"*[cite: 30, 31]. |
+|---|---|---|
+| E1 | Producto con stock en el mínimo | El sistema marca el estado "Stock Mínimo" y lo suma a las alertas del dashboard (CU-12). |
+| E2 | Ajuste que deja stock negativo | El sistema rechaza la operación. |
+| E3 | Baja de producto con pedidos pendientes | El sistema bloquea la baja y sugiere discontinuarlo. |
 
 | Campo | Detalle |
-|-------|---------|
-| Rendimiento | Generación y registro del documento < 2 segundos[cite: 31]. |
-| Frecuencia | Media (semanal / quincenal)[cite: 31]. |
-| Importancia | Media[cite: 31] |
-| Urgencia | Media[cite: 31] |
+|---|---|
+| Rendimiento | < 2 segundos por operación. |
+| Frecuencia | Alta |
+| Importancia | Alta |
+| Urgencia | Media |
+
+---
+
+## CU-09 — Controlar Pedidos y Despachos
+
+| Campo | Detalle |
+|---|---|
+| Identificador | CU-09 |
+| Nombre | Controlar Pedidos y Despachos |
+| Pantalla | wf 09 |
+| Descripción | El operador revisa los pedidos y avanza su estado logístico. |
+| Actores | Operador de Depósito |
+| Precondiciones | Existen pedidos registrados. |
+| Postcondiciones | El estado logístico del pedido queda actualizado y el cliente lo ve en CU-07. |
+
+### Secuencia normal
+
+| # | Acción (actor) | Reacción (sistema) |
+|---|---|---|
+| 1 | El operador ingresa a "Control de Pedidos y Despachos". | El sistema lista ID, cliente, fecha, estado de pago, logística e instalación. |
+| 2 | El operador selecciona un pedido pagado y avanza su estado. | El sistema lo pasa de "En preparación" a "Entregado" y notifica al cliente por e-mail. |
+
+### Excepciones
+
+| # | Situación | Respuesta del sistema |
+|---|---|---|
+| E1 | Pedido con pago pendiente | El sistema no permite avanzar su estado logístico y lo mantiene "En espera". |
+| E2 | Pedido ya entregado | El sistema no admite nuevos cambios de estado. |
+
+| Campo | Detalle |
+|---|---|
+| Rendimiento | < 2 segundos. |
+| Frecuencia | Alta |
+| Importancia | Alta |
+| Urgencia | Alta |
+
+---
+
+## CU-10 — Coordinar Instalación
+
+| Campo | Detalle |
+|---|---|
+| Identificador | CU-10 |
+| Nombre | Coordinar Instalación |
+| Pantalla | wf 09 |
+| Descripción | El operador agenda la instalación en obra de los pedidos que la solicitaron en el carrito. |
+| Actores | Operador de Depósito |
+| Precondiciones | El pedido está pagado y el cliente solicitó instalación. Extiende CU-09. |
+| Postcondiciones | La instalación queda en estado "Agendada" con fecha programada. |
+
+### Secuencia normal
+
+| # | Acción (actor) | Reacción (sistema) |
+|---|---|---|
+| 1 | El operador selecciona un pedido con instalación pendiente. | El sistema muestra la dirección de obra y los productos a instalar. |
+| 2 | El operador indica la fecha de instalación y confirma. | El sistema registra "Sí (Agendada)" y notifica al cliente. |
+
+### Excepciones
+
+| # | Situación | Respuesta del sistema |
+|---|---|---|
+| E1 | Pedido que no solicitó instalación | El sistema no habilita la acción "Agendar". |
+| E2 | Fecha anterior a hoy | El sistema informa "La fecha debe ser posterior a la actual". |
+
+| Campo | Detalle |
+|---|---|
+| Rendimiento | < 2 segundos. |
+| Frecuencia | Media |
+| Importancia | Media |
+| Urgencia | Media |
+
+---
+
+## CU-11 — Generar Orden de Compra
+
+| Campo | Detalle |
+|---|---|
+| Identificador | CU-11 |
+| Nombre | Generar Orden de Compra |
+| Pantalla | wf 08 |
+| Descripción | Emisión de una orden de reabastecimiento a un proveedor, con detalle de materiales, cantidades y costo. |
+| Actores | Gestor de Ventas / Operador de Depósito |
+| Precondiciones | El proveedor está dado de alta y activo. |
+| Postcondiciones | Éxito: orden generada en estado "Pendiente de entrega" y exportada a PDF. Fallo: no se emite. |
+
+### Secuencia normal
+
+| # | Acción (actor) | Reacción (sistema) |
+|---|---|---|
+| 1 | El usuario selecciona un proveedor. | El sistema muestra los materiales asociados (código, descripción, cantidad, costo unitario). |
+| 2 | El usuario define las cantidades a solicitar. | El sistema calcula el total estimado. |
+| 3 | El usuario presiona "Generar Orden de Compra (PDF)". | El sistema registra la orden N° X y genera el PDF. |
+
+### Excepciones
+
+| # | Situación | Respuesta del sistema |
+|---|---|---|
+| E1 | Material discontinuado por el proveedor | El sistema informa "El artículo X ya no es suministrado por este proveedor" e impide incluirlo. |
+| E2 | Proveedor inactivo | El sistema no lo despliega entre los proveedores seleccionables. |
+
+| Campo | Detalle |
+|---|---|
+| Rendimiento | Generación del documento < 2 segundos. |
+| Frecuencia | Media (semanal / quincenal) |
+| Importancia | Media |
+| Urgencia | Media |
+
+---
+
+## CU-12 — Ver Dashboard de Ventas
+
+| Campo | Detalle |
+|---|---|
+| Identificador | CU-12 |
+| Nombre | Ver Dashboard de Ventas |
+| Pantalla | wf 10 |
+| Descripción | Visualización de indicadores del mes para apoyar decisiones de venta y reposición. |
+| Actores | Gestor de Ventas |
+| Precondiciones | Usuario del personal autenticado con rol habilitado. |
+| Postcondiciones | Se muestran los indicadores del período. |
+
+### Secuencia normal
+
+| # | Acción (actor) | Reacción (sistema) |
+|---|---|---|
+| 1 | El gestor ingresa a "Dashboard y Métrica de Ventas". | El sistema muestra ventas del mes, pedidos procesados, cotizaciones aprobadas y alertas de stock mínimo. |
+| 2 | El gestor revisa la evolución y la distribución por material. | El sistema muestra la evolución mensual y las ventas por material. |
+
+### Excepciones
+
+| # | Situación | Respuesta del sistema |
+|---|---|---|
+| E1 | Sin ventas en el período | El sistema muestra los indicadores en cero y un mensaje informativo. |
+
+| Campo | Detalle |
+|---|---|
+| Rendimiento | Cálculo del dashboard < 3 segundos. |
+| Frecuencia | Media |
+| Importancia | Media |
+| Urgencia | Baja |
+
+---
