@@ -1,42 +1,30 @@
-@startuml
+@startuml AberturasLosPampas_CasosDeUso
 left to right direction
 skinparam packageStyle rectangle
 
-actor "Cliente" as cli
-actor "Vendedor" as ven
-actor "Encargado de Depósito" as dep
-actor "Administrador" as admin
-actor "Pasarela de Pago" as pas
+actor "Cliente" as usr
+actor "Cliente Registrado" as usrAuth
+actor "Gestor de Ventas" as admin
+actor "Operador de Fábrica" as op
+actor "Mercado Pago" as mp
 
-rectangle "Plataforma Aberturas Los Pampas" {
-  usecase "CU-01: Registrarse e Iniciar Sesión" as CU1
-  usecase "CU-02: Consultar Catálogo y Filtrar" as CU2
-  usecase "CU-03: Solicitar Cotización a Medida" as CU3
-  usecase "CU-04: Realizar Compra Online" as CU4
-  usecase "CU-05: Procesar Pago Digital" as CU5
-  usecase "CU-06: Consultar Estado de Pedido" as CU6
-  usecase "CU-07: Gestionar Cotizaciones" as CU7
-  usecase "CU-08: Coordinar Instalación Técnica" as CU8
-  usecase "CU-09: Gestionar Stock e Inventario" as CU9
-  usecase "CU-10: Emitir Orden de Compra" as CU10
-  usecase "CU-11: Administrar Usuarios y Roles" as CU11
-  usecase "CU-12: Consultar Log de Auditoría" as CU12
+usrAuth --|> usr
+
+rectangle "Sistema Aberturas Los Pampas" {
+  usecase "CU-01: Consultar Catálogo" as CU01
+  usecase "CU-02: Solicitar Cotización a Medida" as CU02
+  usecase "CU-04: Realizar Checkout" as CU04
+  usecase "CU-05: Procesar Pago Digital" as CU05
+  usecase "CU-10: Generar Orden de Compra" as CU10
+  usecase "CU-12: Agendar Instalación" as CU12
 }
 
-cli --> CU1
-cli --> CU2
-cli --> CU3
-cli --> CU4
-cli --> CU6
-cli --> CU8
-
-CU4 .> CU5 : <<include>>
-CU2 <.. CU3 : <<extend>>
-
-CU5 -- pas
-ven --> CU7
-ven --> CU10
-dep --> CU9
-admin --> CU11
-admin --> CU12
+usr --> CU01
+usr --> CU02
+usrAuth --> CU04
+usrAuth --> CU05
+CU05 ..> mp : <<integra>>
+admin --> CU02
+op --> CU10
+op --> CU12
 @enduml
