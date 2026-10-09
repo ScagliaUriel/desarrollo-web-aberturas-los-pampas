@@ -54,6 +54,7 @@ entity "Pedido" as pedido {
   * estado_envio : VARCHAR(30)
   * total : DECIMAL(10,2)
   * id_usuario : INT <<FK>>
+  id_cotizacion : INT <<FK>>
 }
 
 entity "DetallePedido" as detalle_pedido {
@@ -98,14 +99,36 @@ entity "OrdenCompra" as orden_compra {
   * id_proveedor : INT <<FK>>
 }
 
+entity "DetalleOrdenCompra" as detalle_oc {
+  * id_detalle_oc : INT <<PK>>
+  --
+  * cantidad : INT
+  * precio_costo_unitario : DECIMAL(10,2)
+  * id_orden : INT <<FK>>
+  * id_producto : INT <<FK>>
+}
+
+entity "LogAuditoria" as log_auditoria {
+  * id_log : INT <<PK>>
+  --
+  * fecha_hora : DATETIME
+  * accion : VARCHAR(100)
+  * tabla_afectada : VARCHAR(50)
+  * id_usuario : INT <<FK>>
+}
+
 usuario }|--|| rol
 usuario ||--o{ pedido
 usuario ||--o{ cotizacion
+usuario ||--o{ log_auditoria
 producto }|--|| categoria
 producto }|--|| proveedor
 pedido ||--|{ detalle_pedido
 producto ||--o{ detalle_pedido
 pedido ||--o| instalacion
+pedido }o--o| cotizacion
 proveedor ||--o{ orden_compra
+orden_compra ||--|{ detalle_oc
+producto ||--o{ detalle_oc
 
 @enduml
