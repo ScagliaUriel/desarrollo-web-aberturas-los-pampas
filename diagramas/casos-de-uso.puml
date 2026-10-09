@@ -5,7 +5,7 @@ skinparam packageStyle rectangle
 actor "Cliente" as usr
 actor "Cliente Registrado" as usrAuth
 actor "Gestor de Ventas" as admin
-actor "Operador de Fábrica" as op
+actor "Operador de Depósito" as op
 actor "Mercado Pago" as mp
 
 usrAuth --|> usr
@@ -15,8 +15,9 @@ rectangle "Sistema Aberturas Los Pampas" {
   usecase "CU-02: Solicitar Cotización a Medida" as CU02
   usecase "CU-04: Realizar Checkout" as CU04
   usecase "CU-05: Procesar Pago Digital" as CU05
+  usecase "CU-08: Coordinar Instalación" as CU08
   usecase "CU-10: Generar Orden de Compra" as CU10
-  usecase "CU-12: Agendar Instalación" as CU12
+  usecase "CU-12: Consultar Log de Auditoría" as CU12
 }
 
 usr --> CU01
@@ -24,7 +25,12 @@ usr --> CU02
 usrAuth --> CU04
 usrAuth --> CU05
 CU05 ..> mp : <<integra>>
+CU02 <.. CU01 : <<extend>>
+CU05 ..> CU04 : <<include>>
+
 admin --> CU02
+admin --> CU10
+op --> CU08
 op --> CU10
-op --> CU12
+admin --> CU12
 @enduml
