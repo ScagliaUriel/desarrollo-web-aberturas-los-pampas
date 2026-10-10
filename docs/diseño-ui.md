@@ -1,30 +1,33 @@
 # Diseño UI
 
 ## Cobertura de Wireframes
-Los wireframes de la plataforma están organizados y referenciados en `diagramas/wireframes/`[cite: 31]:
-- `01-home-catalogo.svg`: Grilla de catálogo con filtros[cite: 31].
-- `11-cotizacion-a-medida.svg`: Formulario interactivo para pedidos a medida[cite: 30, 31].
+Los wireframes de la plataforma están organizados en `diagramas/wireframes/` y representan la versión actual del prototipo funcional:
+- `01-home-catalogo.svg`: home del catálogo con productos destacados y llamado a la acción para cotizar a medida.
+- `11-cotizacion-a-medida.svg`: formulario de cotización con tipología, dimensiones, vidrio, color y resumen estimado.
+
+La versión actual prioriza claridad visual y flujo principal sobre filtros avanzados en la pantalla inicial, por lo que la especificación del catálogo debe interpretarse junto con la documentación funcional y no como una promesa de superficie de búsqueda completa.
 
 ---
 
 ## Patrones de diseño aplicados
 
 ### 1. Catálogo público de aberturas
-* **Patrones:** *Grid View*, *Card*, *Faceted Search*[cite: 31].
-* **Justificación orientada al usuario:** Los clientes minoristas navegan prioritariamente desde dispositivos móviles[cite: 30, 31]. Las Cards presentan fotos, precios claros y etiquetas de stock sin recargar la pantalla, facilitando una lectura rápida[cite: 31].
+* **Patrones:** *Grid View*, *Card*, *CTA-first*.
+* **Justificación orientada al usuario:** Los clientes minoristas se desplazan prioritariamente desde dispositivos móviles. Las cards muestran producto, imagen, precio y acción de compra o cotización, reduciendo la cantidad de decisiones en la primera vista.
 
 ### 2. Formulario de Cotización a Medida
-* **Patrones:** *Input Form*, *File Uploader*, *Inline Validation*[cite: 31].
-* **Justificación orientada al usuario:** El personal de ventas y los arquitectos/constructoras requieren especificar medidas en milímetros/metros y adjuntar planos[cite: 31]. La validación en línea evita envíos con errores de rango de fabricación[cite: 31].
+* **Patrones:** *Input Form*, *Summary Panel*, *Inline Validation*.
+* **Justificación orientada al usuario:** El cliente debe completar una solicitud con dimensiones, material, vidrio y acabado, y recibir un resumen estimado antes de enviar. La validación inmediata ayuda a evitar errores comunes en medidas y valores no válidos.
 
 ### 3. Checkout y Pago
-* **Patrones:** *Single-Page Express Checkout*, *Modal Notification*[cite: 30, 31].
-* **Justificación orientada al usuario:** Se consolida el formulario de envío y la invocación a Mercado Pago en una única vista optimizada[cite: 30, 31] para reducir la fricción cognitiva en usuarios con baja experiencia en e-commerce[cite: 30, 31].
+* **Patrones:** *Single-Page Express Checkout*, *Modal Notification*.
+* **Justificación orientada al usuario:** Se consolida el flujo de confirmación y pago para reducir fricción cognitiva, especialmente en usuarios con poca experiencia en e-commerce.
 
 ---
 
 ## Accesibilidad concreta (WCAG 2.1)
 
-1. **Contraste de color:** Relación de contraste mínima de 4.5:1 en todos los textos sobre fondos claros[cite: 31].
-2. **Áreas táctiles (Tap Targets):** Botones y campos en formato mobile con un tamaño mínimo de 48x48 píxeles[cite: 31].
-3. **Navegación por teclado:** Soporte de recorrido por formularios usando `Tab` y `Enter`[cite: 31].
+1. **Contraste de color:** Relación de contraste mínima de 4.5:1 en todos los textos sobre fondos claros.
+2. **Áreas táctiles (Tap Targets):** Botones y campos en formato mobile con un tamaño mínimo de 48x48 píxeles.
+3. **Navegación por teclado:** Soporte de recorrido por formularios usando `Tab` y `Enter`.
+4. **Jerarquía visual:** títulos, etiquetas y estados claros para distinguir pantallas de catálogo, checkout y panel interno.

@@ -71,19 +71,19 @@ El código PlantUML del diagrama general está en [`diagramas/casos-de-uso.puml`
 | Identificador | CU-02 |
 | Nombre | Solicitar Cotización a Medida |
 | Pantalla | wf 11 |
-| Descripción | El cliente configura una abertura fuera de catálogo (tipología, dimensiones, vidrio, color y observaciones), obtiene una estimación y la envía a revisión técnica. |
+| Descripción | El cliente configura una abertura fuera de catálogo (tipología, dimensiones, vidrio, color, observaciones y plano técnico opcional), obtiene una estimación y la envía a revisión técnica. |
 | Actores | Principal: Cliente Registrado / Secundario: Gestor de Ventas |
-| Precondiciones | El cliente está autenticado (CU-03). Se invoca como extensión de CU-01 desde "Solicitar a Medida" o "Cotizar a Medida". |
-| Postcondiciones | Éxito: se registra la solicitud en estado "En Revisión" y queda visible en Mis Pedidos (CU-07). Fallo: no se registra. |
+| Precondiciones | El cliente puede ingresar a la cotización desde el catálogo y, si no tiene sesión iniciada, el sistema deriva a CU-03 para autenticarse antes de enviar la solicitud. Se invoca como extensión de CU-01 desde "Solicitar a Medida" o "Cotizar a Medida". |
+| Postcondiciones | Éxito: se registra la solicitud en estado "En Revisión" con `url_plano` cuando fue adjuntado y queda visible en Mis Pedidos (CU-07). Fallo: no se registra. |
 
 ### Secuencia normal
 
 | # | Acción (actor) | Reacción (sistema) |
 |---|---|---|
 | 1 | El cliente selecciona la tipología e ingresa ancho y alto en mm. | El sistema valida que las dimensiones estén dentro del rango de fabricación. |
-| 2 | El cliente elige tipo de vidrio, color/acabado y completa observaciones. | El sistema guarda la configuración. |
+| 2 | El cliente elige tipo de vidrio, color/acabado, completa observaciones y, si corresponde, adjunta el plano técnico en `url_plano`. | El sistema guarda la configuración y conserva la referencia del plano cuando se carga. |
 | 3 | El cliente presiona "Calcular Estimación". | El sistema muestra el resumen: materiales, mano de obra, vidrio y total estimado. |
-| 4 | El cliente presiona "Enviar a Revisión Técnica". | El sistema registra la solicitud N° COT-X en estado "En Revisión" y notifica al Gestor de Ventas. |
+| 4 | El cliente presiona "Enviar a Revisión Técnica". | El sistema registra la solicitud N° COT-X en estado "En Revisión" con la información completa y notifica al Gestor de Ventas. |
 | 5 | El Gestor de Ventas revisa la solicitud. | El sistema actualiza su estado y notifica al cliente. |
 
 ### Excepciones

@@ -71,13 +71,16 @@ entity "SolicitudCotizacion" as cotizacion {
   * id_cotizacion : INT <<PK>>
   --
   * fecha_solicitud : DATETIME
-  * alto : DECIMAL(5,2)
-  * ancho : DECIMAL(5,2)
+  * alto : INT
+  * ancho : INT
+  * tipologia : VARCHAR(80)
   * material : VARCHAR(50)
   * tipo_vidrio : VARCHAR(50)
+  * color : VARCHAR(50)
+  observaciones : TEXT
   url_plano : VARCHAR(255)
   * estado : VARCHAR(30)
-  precio_cotizado : DECIMAL(10,2)
+  * precio_estimado : DECIMAL(10,2)
   * id_usuario : INT <<FK>>
 }
 
@@ -114,7 +117,10 @@ entity "LogAuditoria" as log_auditoria {
   * fecha_hora : DATETIME
   * accion : VARCHAR(100)
   * tabla_afectada : VARCHAR(50)
+  * id_registro : INT
   * id_usuario : INT <<FK>>
+  valor_anterior : DECIMAL(12,2)
+  valor_nuevo : DECIMAL(12,2)
 }
 
 usuario }|--|| rol
