@@ -1,4 +1,4 @@
-*# Aberturas Los Pampas
+# Aberturas Los Pampas
 
 Sistema web para la gestión, cotización y venta online de aberturas y perfiles de aluminio, PVC y madera.
 
