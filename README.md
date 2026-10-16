@@ -118,5 +118,3 @@ El prototipo navegable se encuentra en `docs/Prototipo/`.
 ## Estado del proyecto
 
 La entrega actual incluye la documentación funcional, validación del alcance, mockups y fundamentos de diseño del sistema. El repositorio se mantiene actualizado con la revisión docente y con la coherencia entre requisitos, historias, casos de uso y wireframes.
-
-La entrega actual incluye la documentación funcional, validación del alcance, mockups y fundamentos de diseño del sistema. El repositorio se mantiene actualizado con la revisión docente y con la coherencia entre requisitos, historias, casos de uso y wireframes.
