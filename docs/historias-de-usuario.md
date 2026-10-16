@@ -82,12 +82,12 @@
 
 | Campo | Detalle |
 |-------|---------|
-| Historia | Como cliente mayorista o profesional, quiero solicitar el presupuesto de una abertura con dimensiones especiales, para obtener una cotización personalizada. |
+| Historia | Como cliente mayorista o profesional, quiero solicitar el presupuesto de una abertura con dimensiones especiales y plano técnico opcional, para obtener una cotización personalizada. |
 | Módulo | Cotizaciones a Medida |
 | Requisitos relacionados | RF-09 |
 
 ### Criterios de aceptación
-1. **Dado** que el cliente completa ancho, alto, material, vidrio y observaciones relevantes, **cuando** presiona "Solicitar cotización", **entonces** el sistema genera el ticket en estado "En Revisión".
+1. **Dado** que el cliente completa ancho, alto, material, vidrio y observaciones relevantes, con o sin plano técnico adjunto, **cuando** presiona "Solicitar cotización", **entonces** el sistema genera el ticket en estado "En Revisión".
 2. **Dado** que el cliente ingresa medidas fuera del rango de fabricación, **cuando** intenta enviar, **entonces** el sistema muestra *"Las dimensiones están fuera del rango estándar de fabricación"*.
 3. **Dado** que el cliente intenta enviar una solicitud con datos incompletos o sin completar campos requeridos, **cuando** valida la operación, **entonces** el sistema informa qué falta antes de registrar la cotización.
 
