@@ -2,22 +2,20 @@
 
 ## Cobertura de Wireframes
 Los wireframes de la plataforma están organizados en `diagramas/wireframes/` y representan la versión actual del prototipo funcional:
-- `01-home-catalogo.svg`: home del catálogo con productos destacados y llamado a la acción para cotizar a medida.
-- `11-cotizacion-a-medida.svg`: formulario de cotización con tipología, dimensiones, vidrio, color y resumen estimado.
-
-La versión actual prioriza claridad visual y flujo principal sobre filtros avanzados en la pantalla inicial, por lo que la especificación del catálogo debe interpretarse junto con la documentación funcional y no como una promesa de superficie de búsqueda completa.
+- `01-home-catalogo.svg`: home del catálogo con productos destacados, filtros por categoría, material y rango de precio, y llamado a la acción para cotizar a medida.
+- `11-cotizacion-a-medida.svg`: formulario de cotización con tipología, dimensiones, material, vidrio, color, plano técnico opcional, observaciones y resumen estimado.
 
 ---
 
 ## Patrones de diseño aplicados
 
 ### 1. Catálogo público de aberturas
-* **Patrones:** *Grid View*, *Card*, *CTA-first*.
-* **Justificación orientada al usuario:** Los clientes minoristas se desplazan prioritariamente desde dispositivos móviles. Las cards muestran producto, imagen, precio y acción de compra o cotización, reduciendo la cantidad de decisiones en la primera vista.
+* **Patrones:** *Grid View*, *Card*, *CTA-first*, *Faceted Search*.
+* **Justificación orientada al usuario:** Los clientes minoristas se desplazan prioritariamente desde dispositivos móviles. Las cards muestran producto, imagen, precio y acción de compra o cotización, reduciendo la cantidad de decisiones en la primera vista. Los filtros por categoría, material y rango de precio permiten encontrar rápidamente el producto buscado.
 
 ### 2. Formulario de Cotización a Medida
-* **Patrones:** *Input Form*, *Summary Panel*, *Inline Validation*.
-* **Justificación orientada al usuario:** El cliente debe completar una solicitud con dimensiones, material, vidrio y acabado, y recibir un resumen estimado antes de enviar. La validación inmediata ayuda a evitar errores comunes en medidas y valores no válidos.
+* **Patrones:** *Input Form*, *Summary Panel*, *Inline Validation*, *File Uploader*.
+* **Justificación orientada al usuario:** El cliente debe completar una solicitud con dimensiones, material, vidrio y acabado, y recibir un resumen estimado antes de enviar. La validación inmediata ayuda a evitar errores comunes en medidas y valores no válidos. El campo de plano técnico opcional permite adjuntar plano técnico cuando se requiere.
 
 ### 3. Checkout y Pago
 * **Patrones:** *Single-Page Express Checkout*, *Modal Notification*.

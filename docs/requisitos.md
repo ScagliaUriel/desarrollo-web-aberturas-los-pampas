@@ -29,7 +29,7 @@ Plataforma web de e-commerce y gestión operativa para Aberturas Los Pampas. El 
 | ID | Requisito |
 |----|-----------|
 | RF-10 | El sistema debe permitir agregar productos al carrito y consolidar una orden de compra. |
-| RF-11 | El sistema debe integrar la pasarela de pagos digitales (Mercado Pago) para el cobro online. |
+| RF-11 | El sistema debe integrar la pasarela de pagos digitales (Mercado Pago) y transferencia bancaria para el cobro online. |
 | RF-12 | El sistema debe emitir y enviar automáticamente la factura/comprobante de compra por e-mail al cliente. |
 | RF-13 | El sistema debe permitir al cliente consultar el historial y el estado logístico de sus pedidos (Pendiente, En preparación, Despachado, Entregado). |
 

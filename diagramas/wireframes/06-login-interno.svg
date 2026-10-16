@@ -13,10 +13,6 @@
   <rect x="420" y="395" width="360" height="42" rx="6" fill="#ffffff" stroke="#94a3b8"/>
   <text x="435" y="421" fill="#64748b" font-size="14">••••••••••••</text>
 
-  <text x="420" y="465" fill="#334155" font-size="14" font-weight="bold">Rol de Usuario</text>
-  <rect x="420" y="480" width="360" height="42" rx="6" fill="#f8fafc" stroke="#94a3b8"/>
-  <text x="435" y="506" fill="#0f172a" font-size="14">Personal de Ventas / Depósito ▾</text>
-
-  <rect x="420" y="550" width="360" height="48" rx="6" fill="#0284c7"/>
-  <text x="530" y="580" fill="#ffffff" font-size="15" font-weight="bold">Ingresar al Sistema</text>
+  <rect x="420" y="480" width="360" height="48" rx="6" fill="#0284c7"/>
+  <text x="530" y="510" fill="#ffffff" font-size="15" font-weight="bold">Ingresar al Sistema</text>
 </svg>
