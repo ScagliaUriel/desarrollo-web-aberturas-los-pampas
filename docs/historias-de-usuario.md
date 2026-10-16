@@ -57,12 +57,12 @@
 
 | Campo | Detalle |
 |-------|---------|
-| Historia | Como cliente, quiero filtrar las aberturas por material y categoría, para encontrar rápidamente el producto que busco. |
+| Historia | Como cliente, quiero filtrar las aberturas por material, categoría y rango de precio, para encontrar rápidamente el producto que busco. |
 | Módulo | Catálogo y Productos |
 | Requisitos relacionados | RF-06, RF-07, RF-08 |
 
 ### Criterios de aceptación
-1. **Dado** que el cliente aplica los filtros "Ventanas" y "Aluminio", **cuando** los ejecuta, **entonces** el catálogo muestra únicamente los productos que coinciden.
+1. **Dado** que el cliente aplica los filtros "Ventanas", "Aluminio" y rango de precio "$100.000 - $300.000", **cuando** los ejecuta, **entonces** el catálogo muestra únicamente los productos que coinciden.
 2. **Dado** que una consulta no arroja coincidencia, **cuando** finaliza la búsqueda, **entonces** el sistema muestra *"No se encontraron aberturas que coincidan con la búsqueda"*.
 
 ### Validación INVEST
