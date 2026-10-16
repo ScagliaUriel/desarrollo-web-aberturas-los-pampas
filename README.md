@@ -15,6 +15,26 @@ El proyecto se desarrolla como un caso de estudio de diseño de sistemas web, co
 - Integrar un flujo de checkout con validación de stock y pago digital.
 - Brindar herramientas internas para controlar inventario, compras a proveedores y seguimiento de pedidos.
 
+## Caso de estudio
+
+**Aberturas Los Pampas** es una empresa ubicada en la zona norte de Rosario, en la calle Huerta Grande 1985. Inició su actividad en el año 2012 como un proyecto familiar entre padre e hijo, impulsado por la falta de empleo de este último. Con algunos ahorros y la venta de bienes personales, comenzaron comprando mercadería para su comercialización, apoyándose en la experiencia previa del padre como representante de otra empresa de aberturas en la provincia de Santa Fe.
+
+La empresa atiende tanto a consumidores minoristas como a mayoristas (ferreterías, corralones, constructoras, estudios de arquitectura y otros negocios del rubro).
+
+**Infraestructura tecnológica actual:** dos computadoras de escritorio (ventas y stock), una notebook de uso del propietario, un televisor digital en recepción, un módem Wi-Fi de 100 Mbps (Claro) con alcance en todo el edificio, dos celulares de uso comercial, una línea fija, alarmas en local y galpón, conexión eléctrica trifásica, posnet y dos impresoras Wi-Fi.
+
+**Problemática detectada:**
+
+- **Ventas:** ausencia de presencia en internet y de una página web propia para comercializar los productos.
+- **Redes:** falta de presencia en redes sociales y de vinculación con un catálogo digital.
+- **Clientes:** no existe un sistema de usuarios que centralice datos de venta, envío e instalación.
+- **Proveedores:** no hay un control sistematizado de datos de facturación, órdenes de compra ni historial de compras.
+- **Stock:** no hay integración entre el control de stock y un canal de venta online.
+- **Seguridad informática:** equipos desactualizados y sin mantenimiento regular, ausencia de red segura, uso indiscriminado de los dispositivos, celulares comerciales sin contraseña y personal sin capacitación en seguridad de la información.
+- **Infraestructura eléctrica:** sin estabilizador de tensión ni correcta división de circuitos.
+
+Este diagnóstico es la base sobre la que el equipo releva requisitos, define historias de usuario y diseña la solución web para la empresa.
+
 ## Documentación del sistema
 
 - `docs/requisitos.md`: requisitos funcionales y no funcionales.
@@ -83,7 +103,9 @@ El prototipo navegable se encuentra en `docs/Prototipo/`.
     ├── 2026-09-18.md
     ├── 2026-09-28.md
     ├── 2026-09-30.md
-    └── 2026-10-09.md
+    ├── 2026-10-09.md
+    ├── 2026-10-14.md
+    └── 2026-10-16.md
 ```
 
 ## Integrantes del equipo
@@ -94,5 +116,7 @@ El prototipo navegable se encuentra en `docs/Prototipo/`.
 - Uriel Scaglia
 
 ## Estado del proyecto
+
+La entrega actual incluye la documentación funcional, validación del alcance, mockups y fundamentos de diseño del sistema. El repositorio se mantiene actualizado con la revisión docente y con la coherencia entre requisitos, historias, casos de uso y wireframes.
 
 La entrega actual incluye la documentación funcional, validación del alcance, mockups y fundamentos de diseño del sistema. El repositorio se mantiene actualizado con la revisión docente y con la coherencia entre requisitos, historias, casos de uso y wireframes.
