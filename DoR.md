@@ -26,7 +26,7 @@
 | 1 | **Sí** | Estructurada según el formato estándar. |
 | 2 | **Sí** | Cuenta con 2 criterios de aceptación Dado/Cuando/Entonces. |
 | 3 | **Sí** | Estructura de base de datos de productos resuelta. |
-| 4 | **Sí** | Wireframe disponible en `diagramas/wireframes/01-home-catalogo.svg`; la vista actual muestra productos destacados y CTA principal. |
+| 4 | **Sí** | Wireframe disponible en `diagramas/wireframes/01-home-catalogo.svg`; la vista actual muestra productos destacados, filtros por categoría, material y rango de precio, y CTA principal. |
 | 5 | **Sí** | Estimada en 3 Story Points. |
 | 6 | **Sí** | Se detalló la tabla INVEST con observaciones individuales. |
 | 7 | **Sí** | Especifica la excepción con el mensaje *"No se encontraron aberturas que coincidan con la búsqueda"*. |
@@ -56,7 +56,7 @@
 | 1 | **Sí** | Formato estándar respetado. |
 | 2 | **Sí** | Define los criterios de aceptación para casos válidos e inválidos. |
 | 3 | **Sí** | No presenta dependencias externas bloqueantes. |
-| 4 | **Sí** | Wireframe disponible en `diagramas/wireframes/11-cotizacion-a-medida.svg`; la vista actual refleja tipología, dimensiones, vidrio y resumen de cotización. |
+| 4 | **Sí** | Wireframe disponible en `diagramas/wireframes/11-cotizacion-a-medida.svg`; la vista actual refleja tipología, dimensiones, material, vidrio, plano técnico opcional y resumen de cotización. |
 | 5 | **Sí** | Estimada en 5 Story Points. |
 | 6 | **No** | El criterio "Pequeña" dio "No" por exigir validaciones, estados de cotización y flujo de revisión. |
 | 7 | **Sí** | Define el mensaje *"Las dimensiones están fuera del rango estándar de fabricación"*. |
