@@ -8,6 +8,7 @@ El código PlantUML del diagrama general está en [`diagramas/casos-de-uso.puml`
 - **Cliente Registrado:** hereda del Cliente. Cotiza a medida, arma el carrito, paga y consulta sus pedidos.
 - **Gestor de Ventas:** personal interno. Revisa cotizaciones, emite órdenes de compra y consulta el dashboard.
 - **Operador de Depósito:** personal interno. Administra productos y stock, controla despachos y coordina instalaciones.
+- **Administrador:** personal interno con máximos privilegios. Controla roles, consulta el registro de auditoría y administra proveedores.
 - **Mercado Pago:** sistema externo. Procesa y valida los cobros.
 
 ## Trazabilidad con los wireframes
@@ -26,6 +27,8 @@ El código PlantUML del diagrama general está en [`diagramas/casos-de-uso.puml`
 | CU-10 — Coordinar Instalación | wf 09 | Operador de Depósito |
 | CU-11 — Generar Orden de Compra | wf 08 | Gestor de Ventas / Operador de Depósito |
 | CU-12 — Ver Dashboard de Ventas | wf 10 | Gestor de Ventas |
+| CU-13 — Consultar Registro de Auditoría | - | Administrador |
+| CU-14 — ABM de Proveedores | wf 08 | Administrador |
 
 ---
 
@@ -454,6 +457,76 @@ El código PlantUML del diagrama general está en [`diagramas/casos-de-uso.puml`
 |---|---|
 | Rendimiento | Cálculo del dashboard < 3 segundos. |
 | Frecuencia | Media |
+| Importancia | Media |
+| Urgencia | Baja |
+
+---
+
+## CU-13 — Consultar Registro de Auditoría
+
+|| Campo | Detalle |
+|---|---|
+| Identificador | CU-13 |
+| Nombre | Consultar Registro de Auditoría |
+| Pantalla | - |
+| Descripción | El administrador consulta el historial de acciones críticas del sistema (modificaciones de precios, cambios manuales de stock y anulaciones de pedidos) con referencia al registro afectado, usuario, fecha y valores anteriores/nuevos. |
+| Actores | Administrador |
+| Precondiciones | Usuario autenticado con rol de Administrador. |
+| Postcondiciones | Se muestra el registro de auditoría filtrado según los criterios seleccionados. |
+
+### Secuencia normal
+
+|| # | Acción (actor) | Reacción (sistema) |
+|---|---|---|
+| 1 | El administrador ingresa a "Registro de Auditoría". | El sistema lista las entradas con fecha, acción, tabla afectada, registro afectado, usuario, valor anterior y valor nuevo. |
+| 2 | El administrador filtra por rango de fechas, acción o usuario. | El sistema recalcula el listado según los filtros aplicados. |
+
+### Excepciones
+
+|| # | Situación | Respuesta del sistema |
+|---|---|---|
+| E1 | Sin registros en el período filtrado | El sistema muestra un mensaje informativo *"No se encontraron registros de auditoría en el período seleccionado"*. |
+
+|| Campo | Detalle |
+|---|---|
+| Rendimiento | Consulta < 2 segundos. |
+| Frecuencia | Baja |
+| Importancia | Alta |
+| Urgencia | Baja |
+
+---
+
+## CU-14 — ABM de Proveedores
+
+|| Campo | Detalle |
+|---|---|
+| Identificador | CU-14 |
+| Nombre | ABM de Proveedores |
+| Pantalla | wf 08 |
+| Descripción | El administrador administra los datos de contacto y rubro de los proveedores: alta, baja y modificación de registros. |
+| Actores | Administrador |
+| Precondiciones | Usuario autenticado con rol de Administrador. |
+| Postcondiciones | El catálogo de proveedores queda actualizado. |
+
+### Secuencia normal
+
+|| # | Acción (actor) | Reacción (sistema) |
+|---|---|---|
+| 1 | El administrador ingresa a "Gestión de Proveedores". | El sistema lista razón social, teléfono, e-mail y estado de los proveedores. |
+| 2 | El administrador presiona "+ Nuevo Proveedor" o edita uno existente. | El sistema muestra el formulario del proveedor. |
+| 3 | El administrador completa o modifica razón social, teléfono, e-mail y rubro. | El sistema valida, persiste y registra el movimiento. |
+
+### Excepciones
+
+|| # | Situación | Respuesta del sistema |
+|---|---|---|
+| E1 | Proveedor con órdenes de compra activas | El sistema bloquea la baja y sugiere discontinuarlo. |
+| E2 | E-mail duplicado | El sistema informa *"El e-mail ya se encuentra registrado para otro proveedor"*. |
+
+|| Campo | Detalle |
+|---|---|
+| Rendimiento | Operación < 2 segundos. |
+| Frecuencia | Baja |
 | Importancia | Media |
 | Urgencia | Baja |
 
