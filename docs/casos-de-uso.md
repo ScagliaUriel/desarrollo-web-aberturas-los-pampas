@@ -196,7 +196,7 @@ El código PlantUML del diagrama general está en [`diagramas/casos-de-uso.puml`
 |---|---|---|
 | 1 | El cliente revisa datos personales y de facturación. | El sistema muestra los datos del cliente precargados. |
 | 2 | El cliente confirma la dirección de entrega o instalación. | El sistema valida la dirección. |
-| 3 | El cliente elige el método de pago y presiona "Pagar con Mercado Pago". | El sistema ejecuta CU-06 (include). |
+| 3 | El cliente elige el método de pago y presiona "Pagar con Mercado Pago" (si elige transferencia bancaria, ver E3). | El sistema ejecuta CU-06 (include). |
 | 4 | El cliente visualiza el resultado. | El sistema muestra la confirmación y envía el comprobante por e-mail. |
 
 ### Excepciones
@@ -205,6 +205,7 @@ El código PlantUML del diagrama general está en [`diagramas/casos-de-uso.puml`
 |---|---|---|
 | E1 | Falta de stock al confirmar | El sistema bloquea el checkout, informa "Producto sin stock disponible" y devuelve al carrito. |
 | E2 | Pago rechazado | El pedido queda "Pendiente de pago" y se ofrece reintentar. |
+| E3 | El cliente elige transferencia bancaria en el paso 3 | El sistema no ejecuta CU-06, muestra los datos de la transferencia (CBU / Alias) y registra el pedido como "Pendiente de pago" hasta que el personal de ventas confirme la acreditación. |
 
 | Campo | Detalle |
 |---|---|
