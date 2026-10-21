@@ -78,7 +78,11 @@ El prototipo navegable se encuentra en `docs/Prototipo/`.
 │   ├── er-modelo.md
 │   ├── diseño-ui.md
 │   ├── stakeholders.md
+│   ├── index.html (acceso y redirección a GitHub Pages)
 │   └── Prototipo/
+│       ├── index.html
+│       ├── styles.css
+│       ├── app.js
 │       ├── Prototipo funcional — Aberturas Los Pampas.html
 │       └── Prototipo funcional — Aberturas Los Pampas.md
 ├── diagramas/
