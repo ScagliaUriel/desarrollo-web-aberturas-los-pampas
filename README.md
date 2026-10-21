@@ -114,10 +114,8 @@ El prototipo navegable se encuentra en `docs/Prototipo/`.
 
 ## Integrantes del equipo
 
-- Máximo Manno
-- Alan Grandi
-- Román Peralta
 - Uriel Scaglia
+- Máximo Manno
 
 ## Estado del proyecto
 
