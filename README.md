@@ -82,9 +82,7 @@ El prototipo navegable se encuentra en `docs/Prototipo/`.
 │   └── Prototipo/
 │       ├── index.html
 │       ├── styles.css
-│       ├── app.js
-│       ├── Prototipo funcional — Aberturas Los Pampas.html
-│       └── Prototipo funcional — Aberturas Los Pampas.md
+│       └── app.js
 ├── diagramas/
 │   ├── casos-de-uso.puml
 │   ├── er.puml
