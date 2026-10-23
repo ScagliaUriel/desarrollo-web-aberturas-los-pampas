@@ -8,11 +8,13 @@ Sistema web para la gestión, cotización y venta online de aberturas y perfiles
 
 ---
 
+
 ## 📝 Descripción del proyecto
 
 Aberturas Los Pampas busca cerrar la brecha entre la venta digital y la operación comercial del negocio. La plataforma integra un catálogo público, cotizaciones a medida, checkout con pago digital, seguimiento del estado de pedidos y herramientas internas para stock, proveedores y gestión operativa.
 
 El proyecto se desarrolla como un caso de estudio de diseño de sistemas web, con foco en requerimientos funcionales y no funcionales, historias de usuario, casos de uso, diagramas de entidad-relación, wireframes y prototipo navegable.
+
 
 ## 🎯 Objetivos principales
 
@@ -20,6 +22,7 @@ El proyecto se desarrolla como un caso de estudio de diseño de sistemas web, co
 - Soportar la cotización a medida con dimensiones, materiales y resumen de estimación.
 - Integrar un flujo de checkout con validación de stock y pago digital.
 - Brindar herramientas internas para controlar inventario, compras a proveedores y seguimiento de pedidos.
+
 
 ## 🏢 Caso de estudio
 
@@ -42,6 +45,7 @@ Dos computadoras de escritorio (ventas y stock), una notebook de uso del propiet
 
 Este diagnóstico es la base sobre la que el equipo releva requisitos, define historias de usuario y diseña la solución web para la empresa.
 
+
 ## 📚 Documentación del sistema
 
 - `docs/requisitos.md`: requisitos funcionales y no funcionales.
@@ -52,6 +56,7 @@ Este diagnóstico es la base sobre la que el equipo releva requisitos, define hi
 - `docs/stakeholders.md`: análisis de stakeholders e impacto.
 - `DoR.md`: checklist de Definition of Ready por historia.
 - `slicing.md`: partición vertical de la épica y decisiones de negocio/arquitectura.
+
 
 ## 🎨 Prototipo y wireframes
 
@@ -69,19 +74,21 @@ Este diagnóstico es la base sobre la que el equipo releva requisitos, define hi
 
 El prototipo navegable se encuentra alojado en `docs/Prototipo/` y puede visualizarse directamente desde el [enlace a GitHub Pages](https://scagliauriel.github.io/desarrollo-web-aberturas-los-pampas/).
 
-##👥 Integrantes del equipo
+
+## 👥 Integrantes del equipo
 
 - Uriel Scaglia
 - Máximo Manno
 
-##🚀 Estado del proyecto
+
+## 🚀 Estado del proyecto
 
 La entrega actual incluye la documentación funcional, validación del alcance, mockups y fundamentos de diseño del sistema. El repositorio se mantiene actualizado con la revisión docente y con la coherencia entre requisitos, historias, casos de uso y wireframes.
+
 
 ## 📂 Estructura del repositorio
 
 ```text
-.
 ├── README.md
 ├── DoR.md
 ├── slicing.md
