@@ -1,27 +1,34 @@
-# Aberturas Los Pampas
+# 🚪 Aberturas Los Pampas
+
+[![Ver en GitHub Pages](https://img.shields.io/badge/Ver_en-GitHub_Pages-success?style=for-the-badge&logo=github)](https://scagliauriel.github.io/desarrollo-web-aberturas-los-pampas/)
 
 Sistema web para la gestión, cotización y venta online de aberturas y perfiles de aluminio, PVC y madera.
 
-## Descripción del proyecto
+**🌐 Acceso al proyecto publicado:** [Visitar Aberturas Los Pampas](https://scagliauriel.github.io/desarrollo-web-aberturas-los-pampas/)
+
+---
+
+## 📝 Descripción del proyecto
 
 Aberturas Los Pampas busca cerrar la brecha entre la venta digital y la operación comercial del negocio. La plataforma integra un catálogo público, cotizaciones a medida, checkout con pago digital, seguimiento del estado de pedidos y herramientas internas para stock, proveedores y gestión operativa.
 
 El proyecto se desarrolla como un caso de estudio de diseño de sistemas web, con foco en requerimientos funcionales y no funcionales, historias de usuario, casos de uso, diagramas de entidad-relación, wireframes y prototipo navegable.
 
-## Objetivos principales
+## 🎯 Objetivos principales
 
 - Facilitar la compra de productos estándar y personalizados desde un sitio web claro y responsive.
 - Soportar la cotización a medida con dimensiones, materiales y resumen de estimación.
 - Integrar un flujo de checkout con validación de stock y pago digital.
 - Brindar herramientas internas para controlar inventario, compras a proveedores y seguimiento de pedidos.
 
-## Caso de estudio
+## 🏢 Caso de estudio
 
 **Aberturas Los Pampas** es una empresa ubicada en la zona norte de Rosario, en la calle Huerta Grande 1985. Inició su actividad en el año 2012 como un proyecto familiar entre padre e hijo, impulsado por la falta de empleo de este último. Con algunos ahorros y la venta de bienes personales, comenzaron comprando mercadería para su comercialización, apoyándose en la experiencia previa del padre como representante de otra empresa de aberturas en la provincia de Santa Fe.
 
 La empresa atiende tanto a consumidores minoristas como a mayoristas (ferreterías, corralones, constructoras, estudios de arquitectura y otros negocios del rubro).
 
-**Infraestructura tecnológica actual:** dos computadoras de escritorio (ventas y stock), una notebook de uso del propietario, un televisor digital en recepción, un módem Wi-Fi de 100 Mbps (Claro) con alcance en todo el edificio, dos celulares de uso comercial, una línea fija, alarmas en local y galpón, conexión eléctrica trifásica, posnet y dos impresoras Wi-Fi.
+**Infraestructura tecnológica actual:** 
+Dos computadoras de escritorio (ventas y stock), una notebook de uso del propietario, un televisor digital en recepción, un módem Wi-Fi de 100 Mbps (Claro) con alcance en todo el edificio, dos celulares de uso comercial, una línea fija, alarmas en local y galpón, conexión eléctrica trifásica, posnet y dos impresoras Wi-Fi.
 
 **Problemática detectada:**
 
@@ -35,7 +42,7 @@ La empresa atiende tanto a consumidores minoristas como a mayoristas (ferreterí
 
 Este diagnóstico es la base sobre la que el equipo releva requisitos, define historias de usuario y diseña la solución web para la empresa.
 
-## Documentación del sistema
+## 📚 Documentación del sistema
 
 - `docs/requisitos.md`: requisitos funcionales y no funcionales.
 - `docs/historias-de-usuario.md`: historias de usuario con criterios de aceptación e INVEST.
@@ -46,7 +53,7 @@ Este diagnóstico es la base sobre la que el equipo releva requisitos, define hi
 - `DoR.md`: checklist de Definition of Ready por historia.
 - `slicing.md`: partición vertical de la épica y decisiones de negocio/arquitectura.
 
-## Prototipo y wireframes
+## 🎨 Prototipo y wireframes
 
 - `diagramas/wireframes/01-home-catalogo.svg`
 - `diagramas/wireframes/02-ficha-producto.svg`
@@ -60,9 +67,9 @@ Este diagnóstico es la base sobre la que el equipo releva requisitos, define hi
 - `diagramas/wireframes/10-reportes.svg`
 - `diagramas/wireframes/11-cotizacion-a-medida.svg`
 
-El prototipo navegable se encuentra en `docs/Prototipo/`.
+El prototipo navegable se encuentra alojado en `docs/Prototipo/` y puede visualizarse directamente desde el [enlace a GitHub Pages](https://scagliauriel.github.io/desarrollo-web-aberturas-los-pampas/).
 
-## Estructura del repositorio
+## 📂 Estructura del repositorio
 
 ```text
 .
@@ -87,34 +94,16 @@ El prototipo navegable se encuentra en `docs/Prototipo/`.
 │   ├── casos-de-uso.puml
 │   ├── er.puml
 │   └── wireframes/
-│       ├── 01-home-catalogo.svg
-│       ├── 02-ficha-producto.svg
-│       ├── 03-carrito.svg
-│       ├── 04-checkout-pago.svg
-│       ├── 05-cuenta-cliente.svg
-│       ├── 06-login-interno.svg
-│       ├── 07-gestion-productos-stock.svg
-│       ├── 08-gestion-proveedores.svg
-│       ├── 09-gestion-pedidos-ventas.svg
-│       ├── 10-reportes.svg
-│       └── 11-cotizacion-a-medida.svg
+│       └── [Archivos .svg de wireframes]
 └── feedback/
     ├── 2026-09-02.md
-    ├── 2026-09-06.md
-    ├── 2026-09-16.md
-    ├── 2026-09-18.md
-    ├── 2026-09-28.md
-    ├── 2026-09-30.md
-    ├── 2026-10-09.md
-    ├── 2026-10-14.md
-    └── 2026-10-16.md
-```
+    └── [Archivos de feedback por fecha]
 
-## Integrantes del equipo
+##👥 Integrantes del equipo
 
 - Uriel Scaglia
 - Máximo Manno
 
-## Estado del proyecto
+##🚀 Estado del proyecto
 
 La entrega actual incluye la documentación funcional, validación del alcance, mockups y fundamentos de diseño del sistema. El repositorio se mantiene actualizado con la revisión docente y con la coherencia entre requisitos, historias, casos de uso y wireframes.
