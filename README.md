@@ -69,6 +69,15 @@ Este diagnóstico es la base sobre la que el equipo releva requisitos, define hi
 
 El prototipo navegable se encuentra alojado en `docs/Prototipo/` y puede visualizarse directamente desde el [enlace a GitHub Pages](https://scagliauriel.github.io/desarrollo-web-aberturas-los-pampas/).
 
+##👥 Integrantes del equipo
+
+- Uriel Scaglia
+- Máximo Manno
+
+##🚀 Estado del proyecto
+
+La entrega actual incluye la documentación funcional, validación del alcance, mockups y fundamentos de diseño del sistema. El repositorio se mantiene actualizado con la revisión docente y con la coherencia entre requisitos, historias, casos de uso y wireframes.
+
 ## 📂 Estructura del repositorio
 
 ```text
@@ -96,14 +105,4 @@ El prototipo navegable se encuentra alojado en `docs/Prototipo/` y puede visuali
 │   └── wireframes/
 │       └── [Archivos .svg de wireframes]
 └── feedback/
-    ├── 2026-09-02.md
     └── [Archivos de feedback por fecha]
-
-##👥 Integrantes del equipo
-
-- Uriel Scaglia
-- Máximo Manno
-
-##🚀 Estado del proyecto
-
-La entrega actual incluye la documentación funcional, validación del alcance, mockups y fundamentos de diseño del sistema. El repositorio se mantiene actualizado con la revisión docente y con la coherencia entre requisitos, historias, casos de uso y wireframes.
